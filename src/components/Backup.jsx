@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { FirebaseContext } from "context/FirebaseContext";
+import Button from "react-bootstrap/Button";
 
 export default function Backup() {
     const { clients, services, expenses } = useContext(FirebaseContext);
 
     return (
         <>
-            <button
-                className='btn btn-outline-success'
+            <Button
+                type='primary'
+                className='mx-auto'
                 onClick={() => {
                     navigator.clipboard.writeText(
                         `Clients : ${JSON.stringify(
@@ -22,7 +24,7 @@ export default function Backup() {
                 }}
             >
                 Backup
-            </button>
+            </Button>
         </>
     );
 }

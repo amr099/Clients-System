@@ -38,11 +38,6 @@ export default function ExpensesTable() {
                 </tr>
             </thead>
             <tbody>
-                {/* <tr>
-                    <td>{revenues}</td>
-                    <td>{expenses}</td>
-                    <td>{revenues - expenses}</td>
-                </tr> */}
                 {transactions?.map((t) => (
                     <tr>
                         <td>{t.date}</td>

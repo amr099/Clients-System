@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AuthContextProvider } from "./context/AuthContext";
 import { FirebaseContextProvider } from "./context/FirebaseContext";
 import Home from "./Pages/Home";
 import ClientForm from "./Routes/Forms/ClientForm";
@@ -64,13 +63,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.render(
-    <FirebaseContextProvider>
-        <AuthContextProvider>
-            <React.StrictMode>
-                <RouterProvider router={router} />
-            </React.StrictMode>
-        </AuthContextProvider>
-    </FirebaseContextProvider>,
+    <React.StrictMode>
+        <FirebaseContextProvider>
+            <RouterProvider router={router} />
+        </FirebaseContextProvider>
+    </React.StrictMode>,
     document.getElementById("root")
 );
 

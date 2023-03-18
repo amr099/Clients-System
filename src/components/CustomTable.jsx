@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { FirebaseContext } from "context/FirebaseContext";
 import { db } from "firebase-config";
+import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
 
 export default function CustomTable({ setName, transactions, table }) {
     const { clients } = useContext(FirebaseContext);
@@ -20,18 +22,15 @@ export default function CustomTable({ setName, transactions, table }) {
 
     return (
         <div className='d-flex flex-column col mx-auto w-75 pt-4 custom-table'>
-            <select
+            <Form.Select
+                className='mb-4'
                 onChange={(e) => onChange(e.target.value)}
-                class='form-select'
             >
-                <option disabled selected>
-                    Select Client
-                </option>
-                {clients?.map((c) => (
-                    <option value={c.name}>{c.name}</option>
+                {clients?.map((s) => (
+                    <option value={s.name}>{s.name}</option>
                 ))}
-            </select>
-            <table class='table table-dark mt-4'>
+            </Form.Select>
+            <Table striped hover variant='dark'>
                 <thead>
                     <tr>
                         <th scope='col'>Code</th>
@@ -52,7 +51,8 @@ export default function CustomTable({ setName, transactions, table }) {
                         </tr>
                     </>
                 </tbody>
-            </table>
+            </Table>
+            <hr />
             {table}
         </div>
     );

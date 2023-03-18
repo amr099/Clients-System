@@ -17,28 +17,15 @@ export default function ClientForm() {
         "service",
         "cost",
         "payment",
-        "dataAndComment",
+        "dateAndComment",
     ];
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (data) => {
         try {
-            console.log(clients);
             setSuccess(false);
             setLoading(true);
-            e.preventDefault();
-            let name = e.target[0].value;
-            let code = e.target[1].value;
-            let reg = e.target[2].value;
-            let service = e.target[3].value;
-            let cost = e.target[4].value;
-            let payment = e.target[5].value;
-            let comment = e.target[6].value;
-            let d = new Date(e.target[7].value);
-            let date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-            let address = e.target[8].value;
-            let phone = e.target[9].value;
 
-            if (clients.find((c) => c.name === name)) {
+            if (clients.find((c) => c.name === data.newClientName)) {
                 console.log("this name already used");
                 setError("this name already used");
                 setLoading(false);
@@ -46,7 +33,7 @@ export default function ClientForm() {
 
                 return;
             }
-            if (clients.find((c) => c.code === code)) {
+            if (clients.find((c) => c.code === data.code)) {
                 console.log("this code already used");
                 setError("الكود موجود بالفعل");
                 setLoading(false);
@@ -54,7 +41,7 @@ export default function ClientForm() {
 
                 return;
             }
-            if (clients.find((c) => c.reg === reg)) {
+            if (clients.find((c) => c.reg === data.reg)) {
                 console.log("this regestiry code already used");
                 setError("الرقم التسجيلى موجود بالفعل");
                 setLoading(false);
@@ -64,27 +51,27 @@ export default function ClientForm() {
             }
 
             let newTransaction = {
-                service: service,
-                cost: cost,
-                payment: payment,
-                amount: cost - payment,
-                comment: comment,
-                date: date,
+                service: data.service,
+                cost: data.cost,
+                payment: data.payment,
+                comment: data.comment,
+                date: `${new Date(data.date).getDate()}/${
+                    new Date(data.date).getMonth() + 1
+                }/${new Date(data.date).getFullYear()}`,
             };
 
-            let clientRef = await doc(db, "Clients", name);
+            let clientRef = await doc(db, "Clients", data.newClientName);
             await setDoc(clientRef, {
                 transaction: arrayUnion(newTransaction),
-                name: name,
-                code: code,
-                reg: reg,
-                address: address,
-                phone: phone,
+                name: data.newClientName,
+                code: data.code,
+                reg: data.reg,
+                address: data.address,
+                phone: data.phone,
             });
             setLoading(false);
             setError(false);
             setSuccess(true);
-            e.target.reset();
         } catch (e) {
             console.log(e.message);
             console.log("error adding new client.");
