@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import CustomTable from "components/CustomTable";
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from "firebase-config";
+import Table from "react-bootstrap/Table";
 
 export default function RevenuesTable() {
     const [name, setName] = useState();
     const [revenues, setRevenue] = useState(0);
     const [expenses, setExpenses] = useState(0);
     const table = (
-        <table class='table table-striped'>
+        <Table responsive striped hover>
             <thead>
                 <tr>
                     <th scope='col'>Revenues</th>
@@ -18,12 +19,12 @@ export default function RevenuesTable() {
             </thead>
             <tbody>
                 <tr>
-                    <td>{revenues}</td>
-                    <td>{expenses}</td>
-                    <td>{revenues - expenses}</td>
+                    <td>{revenues || 0}</td>
+                    <td>{expenses || 0}</td>
+                    <td>{revenues - expenses || 0}</td>
                 </tr>
             </tbody>
-        </table>
+        </Table>
     );
 
     useEffect(() => {

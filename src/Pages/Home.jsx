@@ -9,7 +9,7 @@ export default function Home() {
             {nav ? (
                 <Nav />
             ) : (
-                <i class='bi bi-list' onClick={() => setNav(!nav)}></i>
+                <i className='bi bi-list' onClick={() => setNav(!nav)}></i>
             )}
             <Outlet />
         </div>

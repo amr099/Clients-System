@@ -1,15 +1,34 @@
 import React, { useState, useEffect, useContext } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { arrayRemove, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
-import { FirebaseContext } from "./../../context/FirebaseContext";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 export default function TransactionsTable() {
     const [name, setName] = useState();
     const [transactions, setTransactions] = useState();
+    const onDelete = async (date, service, cost, payment, comment) => {
+        try {
+            const ClientDoc = doc(db, "Clients", name);
+            updateDoc(ClientDoc, {
+                transaction: arrayRemove({
+                    date: date,
+                    service: service,
+                    cost: cost,
+                    payment: payment,
+                    comment: comment,
+                }),
+            });
+        } catch (e) {
+            console.log(e);
+        }
+        console.log("deleted");
+    };
+
     let finalAmount = 0;
     const table = (
-        <table class='table table-striped'>
+        <Table responsive striped hover>
             <thead>
                 <tr>
                     <th scope='col'>Date</th>
@@ -21,18 +40,38 @@ export default function TransactionsTable() {
                 </tr>
             </thead>
             <tbody>
-                {transactions?.map((t) => (
-                    <tr>
+                {transactions?.map((t, index) => (
+                    <tr key={index}>
                         <td>{t.date}</td>
                         <td>{t.service}</td>
-                        <td>{t.cost}</td>
-                        <td>{t.payment}</td>
-                        <td>{(finalAmount += t.payment - t.cost)}</td>
+                        <td>{t.cost || 0}</td>
+                        <td>{t.payment || 0}</td>
+                        <td>
+                            {(finalAmount += isNaN(t.payment) - isNaN(t.cost))
+                                ? 0
+                                : t.payment - t.cost}
+                        </td>
                         <td>{t.comment}</td>
+                        <td>
+                            <Button
+                                variant='danger'
+                                onClick={() =>
+                                    onDelete(
+                                        t.date,
+                                        t.service,
+                                        t.cost,
+                                        t.payment,
+                                        t.comment
+                                    )
+                                }
+                            >
+                                <i className='bi bi-trash'></i>
+                            </Button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
-        </table>
+        </Table>
     );
 
     useEffect(() => {
@@ -54,11 +93,5 @@ export default function TransactionsTable() {
         getTransactions();
     }, [name]);
 
-    return (
-        <CustomTable
-            transactions={transactions}
-            setName={setName}
-            table={table}
-        />
-    );
+    return <CustomTable setName={setName} table={table} />;
 }

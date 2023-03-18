@@ -14,6 +14,7 @@ export default function PaymentForm(data) {
         setLoading(true);
 
         let newPayment = {
+            cost: 0,
             payment: data.payment,
             comment: data.comment,
             date: `${new Date(data.date).getDate()}/${

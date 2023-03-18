@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
-import { FirebaseContext } from "./../../context/FirebaseContext";
+import Table from "react-bootstrap/Table";
 
 export default function ExpensesTable() {
     const [name, setName] = useState();
@@ -28,7 +28,7 @@ export default function ExpensesTable() {
     }, [name]);
 
     const table = (
-        <table class='table table-striped'>
+        <Table responsive striped hover>
             <thead>
                 <tr>
                     <th scope='col'>Date</th>
@@ -38,23 +38,17 @@ export default function ExpensesTable() {
                 </tr>
             </thead>
             <tbody>
-                {transactions?.map((t) => (
-                    <tr>
+                {transactions?.map((t, index) => (
+                    <tr key={index}>
                         <td>{t.date}</td>
                         <td>{t.expense}</td>
-                        <td>{t.cost}</td>
+                        <td>{t.cost || 0}</td>
                         <td>{t.comment}</td>
                     </tr>
                 ))}
             </tbody>
-        </table>
+        </Table>
     );
 
-    return (
-        <CustomTable
-            setName={setName}
-            transactions={transactions}
-            table={table}
-        />
-    );
+    return <CustomTable setName={setName} table={table} />;
 }
