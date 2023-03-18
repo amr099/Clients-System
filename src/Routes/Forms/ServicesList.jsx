@@ -37,12 +37,12 @@ export default function ServicesList() {
     return (
         <div className='d-flex flex-column mx-auto mt-4 w-50'>
             <form
-                class='row g-3 needs-validation'
+                className='row g-3 needs-validation'
                 onSubmit={handleSubmit(addService)}
             >
                 <h1 className='alert alert-warning'> Edit Services List</h1>
                 <div className='d-flex flex-wrap mb-4'>
-                    <div class='mb-1 w-50'>
+                    <div className='mb-1 w-50'>
                         <Form.Group className='mb-3'>
                             <Form.Label>New Service</Form.Label>
                             <Form.Control
@@ -60,7 +60,9 @@ export default function ServicesList() {
                 <div className='w-50 mt-4'>
                     <Form.Select className='mb-3'>
                         {services?.map((s) => (
-                            <option value={s.name}>{s.name} </option>
+                            <option key={s.name} value={s.name}>
+                                {s.name}{" "}
+                            </option>
                         ))}
                     </Form.Select>
                     <Button type='submit' variant='danger'>

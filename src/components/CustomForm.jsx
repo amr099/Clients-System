@@ -38,8 +38,10 @@ export default function CustomForm({
                         <Form.Select
                             {...register("clientName", { required: true })}
                         >
-                            {clients?.map((s) => (
-                                <option value={s.name}>{s.name}</option>
+                            {clients?.map((c) => (
+                                <option key={c.name} value={c.name}>
+                                    {c.name}
+                                </option>
                             ))}
                         </Form.Select>
                     </Form.Group>
@@ -66,7 +68,9 @@ export default function CustomForm({
                             {...register("service", { required: true })}
                         >
                             {services?.map((s) => (
-                                <option value={s.name}>{s.name}</option>
+                                <option ley={s.name} value={s.name}>
+                                    {s.name}
+                                </option>
                             ))}
                         </Form.Select>
                     </Form.Group>
