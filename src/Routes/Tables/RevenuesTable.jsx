@@ -8,7 +8,7 @@ export default function RevenuesTable() {
     const [name, setName] = useState();
     const [revenues, setRevenue] = useState(0);
     const [expenses, setExpenses] = useState(0);
-    const table = (
+    const table = transactions && (
         <Table responsive striped hover>
             <thead>
                 <tr>

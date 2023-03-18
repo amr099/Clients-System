@@ -40,37 +40,41 @@ export default function CustomTable({ setName, table }) {
                     </option>
                 ))}
             </Form.Select>
-            <Table striped hover variant='dark'>
-                <thead>
-                    <tr>
-                        <th scope='col'>Code</th>
-                        <th scope='col'>Name</th>
-                        <th scope='col'>Reg. Code</th>
-                        <th scope='col'>Mobile</th>
-                        <th scope='col'>Address</th>
-                        <th scope='col'>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <>
+            {clientData && (
+                <Table striped hover variant='dark'>
+                    <thead>
                         <tr>
-                            <td>{clientData?.code}</td>
-                            <td>{clientData?.name}</td>
-                            <td>{clientData?.reg}</td>
-                            <td>{clientData?.phone}</td>
-                            <td>{clientData?.address}</td>
-                            <td>
-                                <Button
-                                    variant='danger'
-                                    onClick={() => onDelete(clientData.name)}
-                                >
-                                    <i className='bi bi-trash'></i>
-                                </Button>
-                            </td>
+                            <th scope='col'>Code</th>
+                            <th scope='col'>Name</th>
+                            <th scope='col'>Reg. Code</th>
+                            <th scope='col'>Mobile</th>
+                            <th scope='col'>Address</th>
+                            <th scope='col'>Remove</th>
                         </tr>
-                    </>
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        <>
+                            <tr>
+                                <td>{clientData?.code}</td>
+                                <td>{clientData?.name}</td>
+                                <td>{clientData?.reg}</td>
+                                <td>{clientData?.phone}</td>
+                                <td>{clientData?.address}</td>
+                                <td>
+                                    <Button
+                                        variant='danger'
+                                        onClick={() =>
+                                            onDelete(clientData.name)
+                                        }
+                                    >
+                                        <i className='bi bi-trash'></i>
+                                    </Button>
+                                </td>
+                            </tr>
+                        </>
+                    </tbody>
+                </Table>
+            )}
             <hr />
             {table}
         </div>

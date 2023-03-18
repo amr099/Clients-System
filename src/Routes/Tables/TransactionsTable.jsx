@@ -9,25 +9,32 @@ export default function TransactionsTable() {
     const [name, setName] = useState();
     const [transactions, setTransactions] = useState();
     const onDelete = async (date, service, cost, payment, comment) => {
-        try {
-            const ClientDoc = doc(db, "Clients", name);
-            updateDoc(ClientDoc, {
-                transaction: arrayRemove({
-                    date: date,
-                    service: service,
-                    cost: cost,
-                    payment: payment,
-                    comment: comment,
-                }),
-            });
-        } catch (e) {
-            console.log(e);
+        const res = window.confirm(
+            "Are you sure aboue deleting this transaction ?"
+        );
+        if (res) {
+            try {
+                const ClientDoc = doc(db, "Clients", name);
+                updateDoc(ClientDoc, {
+                    transaction: arrayRemove({
+                        date: date,
+                        service: service,
+                        cost: cost,
+                        payment: payment,
+                        comment: comment,
+                    }),
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        } else {
+            return;
         }
         console.log("deleted");
     };
 
     let finalAmount = 0;
-    const table = (
+    const table = transactions && (
         <Table responsive striped hover>
             <thead>
                 <tr>
@@ -47,7 +54,7 @@ export default function TransactionsTable() {
                         <td>{t.cost || 0}</td>
                         <td>{t.payment || 0}</td>
                         <td>
-                            {(finalAmount += isNaN(t.payment) - isNaN(t.cost))
+                            {(finalAmount += isNaN(t.payment - t.cost))
                                 ? 0
                                 : t.payment - t.cost}
                         </td>
