@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FirebaseContext } from "./context/FirebaseContext";
+import { FirebaseContext } from "context/FirebaseContext";
 
 export default function Backup() {
     const { clients, services, expenses } = useContext(FirebaseContext);

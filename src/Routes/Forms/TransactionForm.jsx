@@ -7,6 +7,7 @@ export default function TransactionForm() {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const inputs = ["selectClient", "payment", "cost", "dateAndComment"];
 
     const onSubmit = async (e) => {
         setSuccess(false);
@@ -59,18 +60,11 @@ export default function TransactionForm() {
     return (
         <CustomForm
             label={"New Transaction"}
-            setError={setError}
-            setLoading={setLoading}
-            setSuccess={setSuccess}
             onSubmit={onSubmit}
             loading={loading}
             success={success}
             error={error}
-            dateAndComment={true}
-            selectClient={true}
-            selectService={true}
-            cost={true}
-            payment={true}
+            inputs={inputs}
         />
     );
 }

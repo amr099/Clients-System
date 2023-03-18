@@ -11,6 +11,15 @@ export default function ClientForm() {
 
     const { clients } = useContext(FirebaseContext);
 
+    const inputs = [
+        "newClientName",
+        "newClient",
+        "service",
+        "cost",
+        "payment",
+        "dataAndComment",
+    ];
+
     const onSubmit = async (e) => {
         try {
             console.log(clients);
@@ -89,18 +98,10 @@ export default function ClientForm() {
         <CustomForm
             label={"New Client"}
             onSubmit={onSubmit}
-            setError={setError}
-            setLoading={setLoading}
-            setSuccess={setSuccess}
             error={error}
             loading={loading}
             success={success}
-            name={true}
-            selectService={true}
-            cost={true}
-            payment={true}
-            dateAndComment={true}
-            newClient={true}
+            inputs={inputs}
         />
     );
 }

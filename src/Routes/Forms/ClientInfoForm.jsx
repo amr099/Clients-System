@@ -10,6 +10,8 @@ export default function ClientInfoForm() {
     const [error, setError] = useState(false);
     const { clients } = useContext(FirebaseContext);
 
+    const inputs = ["selectClient", "newClient"];
+
     const onSubmit = async (e) => {
         setSuccess(false);
         setLoading(true);
@@ -62,16 +64,12 @@ export default function ClientInfoForm() {
     };
     return (
         <CustomForm
+            label={"Edit Client Info."}
             onSubmit={onSubmit}
             loading={loading}
             success={success}
             error={error}
-            setError={setError}
-            setLoading={setLoading}
-            setSuccess={setSuccess}
-            selectClient={true}
-            label={"Edit Client Info."}
-            newClient={true}
+            inputs={inputs}
         />
     );
 }
