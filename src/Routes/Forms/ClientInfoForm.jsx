@@ -12,23 +12,18 @@ export default function ClientInfoForm() {
 
     const inputs = ["selectClient", "newClient"];
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (data) => {
+        console.log(data);
         setSuccess(false);
         setLoading(true);
-        e.preventDefault();
-        let clientName = e.target[0].value;
-        let code = e.target[1].value;
-        let reg = e.target[2].value;
-        let address = e.target[3].value;
-        let phone = e.target[4].value;
 
-        if (clients.find((c) => c.code === code)) {
+        if (clients.find((c) => c.code === data.code)) {
             console.log("this code already used");
             setError("الكود موجود بالفعل");
             setLoading(false);
             return;
         }
-        if (clients.find((c) => c.reg === reg)) {
+        if (clients.find((c) => c.reg === data.reg)) {
             console.log("this regestiry code already used");
             setError("الرقم التسجيلى موجود بالفعل");
             setLoading(false);
@@ -36,16 +31,16 @@ export default function ClientInfoForm() {
         }
 
         try {
-            let clientDoc = doc(db, "Clients", clientName);
+            let clientDoc = doc(db, "Clients", data.clientName);
 
-            if (code) await updateDoc(clientDoc, { code: code });
-            if (reg) await updateDoc(clientDoc, { reg: reg });
-            if (phone) await updateDoc(clientDoc, { phone: phone });
-            if (address) await updateDoc(clientDoc, { address: address });
+            if (data.code) await updateDoc(clientDoc, { code: data.code });
+            if (data.reg) await updateDoc(clientDoc, { reg: data.reg });
+            if (data.phone) await updateDoc(clientDoc, { phone: data.phone });
+            if (data.address)
+                await updateDoc(clientDoc, { address: data.address });
             setLoading(false);
             setSuccess(true);
             setError(false);
-            e.target.reset();
         } catch (e) {
             if (
                 e.message ===

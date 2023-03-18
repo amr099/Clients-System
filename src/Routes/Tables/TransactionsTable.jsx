@@ -27,7 +27,7 @@ export default function TransactionsTable() {
                         <td>{t.service}</td>
                         <td>{t.cost}</td>
                         <td>{t.payment}</td>
-                        <td>{(finalAmount += t.amount)}</td>
+                        <td>{(finalAmount += t.payment - t.cost)}</td>
                         <td>{t.comment}</td>
                     </tr>
                 ))}

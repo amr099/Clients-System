@@ -9,25 +9,17 @@ export default function ExpensesForm() {
     const [error, setError] = useState(false);
     const inputs = ["selectClient", "expense", "dateAndComment"];
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (data) => {
         setSuccess(false);
         setLoading(true);
-        e.preventDefault();
-        let name = e.target[0].value;
-        let cost = e.target[1].value;
-        let expense = e.target[2].value;
-        let comment = e.target[4].value;
-        let d = new Date(e.target[3].value);
-        let date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-
         let newExpense = {
-            cost: cost,
-            expense: expense,
-            comment: comment,
-            date: date,
+            cost: data.expcost,
+            expense: data.expense,
+            comment: data.comment,
+            date: data.date,
         };
 
-        let clientRef = await doc(db, "Expenses", name);
+        let clientRef = await doc(db, "Expenses", data.clientName);
         try {
             await updateDoc(clientRef, {
                 transaction: arrayUnion(newExpense),
@@ -35,7 +27,6 @@ export default function ExpensesForm() {
             setSuccess(true);
             setLoading(false);
             setError(false);
-            e.target.reset();
         } catch (e) {
             if (
                 e.message.startsWith(
@@ -43,13 +34,12 @@ export default function ExpensesForm() {
                 )
             ) {
                 await setDoc(clientRef, {
-                    name: name,
+                    name: data.clientName,
                     transaction: arrayUnion(newExpense),
                 });
                 setSuccess(true);
                 setLoading(false);
                 setError(false);
-                e.target.reset();
             } else {
                 console.log(e.message);
                 console.log("error adding new Client Expenses.");
