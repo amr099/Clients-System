@@ -7,6 +7,7 @@ export default function PaymentForm() {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const inputs = ["selectClient", "payment", "dateAndComment"];
 
     const onSubmit = async (e) => {
         setSuccess(false);
@@ -58,15 +59,10 @@ export default function PaymentForm() {
         <CustomForm
             label={"New Payment"}
             onSubmit={onSubmit}
-            setError={setError}
-            setLoading={setLoading}
-            setSuccess={setSuccess}
             error={error}
             loading={loading}
             success={success}
-            selectClient={true}
-            payment={true}
-            dateAndComment={true}
+            inputs={inputs}
         />
     );
 }

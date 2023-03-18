@@ -7,6 +7,7 @@ export default function ExpensesForm() {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const inputs = ["selectClient", "expense", "dateAndComment"];
 
     const onSubmit = async (e) => {
         setSuccess(false);
@@ -63,15 +64,10 @@ export default function ExpensesForm() {
         <CustomForm
             label={"New Expense"}
             onSubmit={onSubmit}
-            setError={setError}
-            setLoading={setLoading}
-            setSuccess={setSuccess}
             error={error}
             loading={loading}
             success={success}
-            selectClient={true}
-            expense={true}
-            dateAndComment={true}
+            inputs={inputs}
         />
     );
 }

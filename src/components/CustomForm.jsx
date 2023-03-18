@@ -5,26 +5,19 @@ import SelectClient from "./SelectClient";
 import SelectService from "./SelectService";
 
 export default function CustomForm({
-    onSubmit,
+    label,
     loading,
     success,
     error,
-    name,
-    dateAndComment,
-    selectClient,
-    selectService,
-    cost,
-    payment,
-    label,
-    newClient,
-    expense,
+    onSubmit,
+    inputs,
 }) {
     return (
         <>
             <div className='d-flex flex-column mx-auto pt-4 w-50 custom-form'>
                 <form onSubmit={onSubmit}>
                     <h1 className='alert alert-success'>{label}</h1>
-                    {name && (
+                    {inputs?.find((i) => i === "newClientName") && (
                         <div class='mb-3'>
                             <label class='form-label'>
                                 Name<span>*</span>
@@ -32,8 +25,11 @@ export default function CustomForm({
                             <input type='text' class='form-control' required />
                         </div>
                     )}
-                    {selectClient && <SelectClient />}
-                    {newClient && (
+
+                    {inputs?.find((i) => i === "selectClient") && (
+                        <SelectClient />
+                    )}
+                    {inputs?.find((i) => i === "newClient") && (
                         <>
                             <div class='mb-4'>
                                 <label class='form-label'>Code</label>
@@ -47,8 +43,8 @@ export default function CustomForm({
                             </div>
                         </>
                     )}
-                    {selectService && <SelectService />}
-                    {cost && (
+                    {inputs?.find((i) => i === "service") && <SelectService />}
+                    {inputs?.find((i) => i === "cost") && (
                         <div class='mb-4'>
                             <label class='form-label'>
                                 Price<span>*</span>
@@ -60,7 +56,7 @@ export default function CustomForm({
                             />
                         </div>
                     )}
-                    {expense && (
+                    {inputs?.find((i) => i === "expense") && (
                         <>
                             <div class='mb-4'>
                                 <label class='form-label'>
@@ -84,7 +80,7 @@ export default function CustomForm({
                             </div>
                         </>
                     )}
-                    {payment && (
+                    {inputs?.find((i) => i === "payment") && (
                         <div class='mb-4'>
                             <label class='form-label'>
                                 Payment<span>*</span>
@@ -96,8 +92,10 @@ export default function CustomForm({
                             />
                         </div>
                     )}
-                    {dateAndComment && <DateAndComment />}
-                    {newClient && (
+                    {inputs?.find((i) => i === "dateAndComment") && (
+                        <DateAndComment />
+                    )}
+                    {inputs?.find((i) => i === "newClient") && (
                         <>
                             <div class='mb-4'>
                                 <label class='form-label'>Address</label>
