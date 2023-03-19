@@ -34,7 +34,7 @@ export default function TransactionsTable() {
     };
 
     let finalAmount = 0;
-    const table = transactions && (
+    const table = name && (
         <Table responsive striped hover>
             <thead>
                 <tr>

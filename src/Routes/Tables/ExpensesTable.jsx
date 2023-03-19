@@ -4,10 +4,11 @@ import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import Chart from "components/Chart";
 
 export default function ExpensesTable() {
     const [name, setName] = useState();
-    const [transactions, setTransactions] = useState();
+    const [transactions, setTransactions] = useState(false);
 
     const onDelete = async (date, expense, cost, comment) => {
         const res = window.confirm(
@@ -51,7 +52,7 @@ export default function ExpensesTable() {
         getExpenses();
     }, [name]);
 
-    const table = transactions && (
+    const table = name && (
         <Table responsive striped hover>
             <thead>
                 <tr>
@@ -89,5 +90,10 @@ export default function ExpensesTable() {
         </Table>
     );
 
-    return <CustomTable setName={setName} table={table} />;
+    // return <CustomTable setName={setName} table={table} />;
+    return (
+        <div className='d-flex flex-column col mx-auto w-75 pt-4 custom-table'>
+            <Chart />
+        </div>
+    );
 }

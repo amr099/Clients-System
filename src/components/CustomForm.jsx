@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import CustomToast from "./CustomToast";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
+import Toast from "react-bootstrap/Toast";
 import { useForm } from "react-hook-form";
 import { FirebaseContext } from "context/FirebaseContext";
 
@@ -152,8 +152,20 @@ export default function CustomForm({
                         </Form.Group>
                     </>
                 )}
-                {success && <CustomToast type='success' text='تم التسجيل' />}
-                {error && <CustomToast type='warning' text={error} />}
+                {success && (
+                    <Toast bg='success' autohide='true'>
+                        <Toast.Body>
+                            <strong>تم التسجيل</strong>
+                        </Toast.Body>
+                    </Toast>
+                )}
+                {error && (
+                    <Toast bg='warning' autohide='true'>
+                        <Toast.Body>
+                            <strong>{error}</strong>
+                        </Toast.Body>
+                    </Toast>
+                )}
                 {loading ? (
                     <Button variant='primary' disabled>
                         Loading…
