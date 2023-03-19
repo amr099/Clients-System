@@ -16,6 +16,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import "./reset.css";
 import ExpensesTable from "Routes/Tables/ExpensesTable";
+import RevenuesChart from "./Routes/Tables/RevenuesChart";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path: "/revenues",
                 element: <RevenuesTable />,
+            },
+            {
+                path: "/revenueschart",
+                element: <RevenuesChart />,
             },
             {
                 path: "/clientinfo",

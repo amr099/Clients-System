@@ -26,11 +26,14 @@ export default function Nav() {
             <Link to='transactions'>
                 <i className='bi bi-card-list'></i> <span>Transactions</span>
             </Link>
+            <Link to='expenses'>
+                <i className='bi bi-bar-chart'></i> <span>Expnenes</span>
+            </Link>
             <Link to='revenues'>
                 <i className='bi bi-bar-chart'></i> <span>Revenues</span>
             </Link>
-            <Link to='expenses'>
-                <i className='bi bi-bar-chart'></i> <span>Expnenes</span>
+            <Link to='revenueschart'>
+                <i className='bi bi-bar-chart'></i> <span>RevenuesChart</span>
             </Link>
 
             <hr />

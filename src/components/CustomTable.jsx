@@ -33,7 +33,11 @@ export default function CustomTable({ setName, table }) {
             <Form.Select
                 className='mb-4'
                 onChange={(e) => onChange(e.target.value)}
+                defaultValue='0'
             >
+                <option value='0' disabled>
+                    Choose Client
+                </option>
                 {clients?.map((c) => (
                     <option key={c.name} value={c.name}>
                         {c.name}

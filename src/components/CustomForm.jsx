@@ -68,7 +68,7 @@ export default function CustomForm({
                             {...register("service", { required: true })}
                         >
                             {services?.map((s) => (
-                                <option ley={s.name} value={s.name}>
+                                <option key={s.name} value={s.name}>
                                     {s.name}
                                 </option>
                             ))}

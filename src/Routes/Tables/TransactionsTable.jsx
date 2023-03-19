@@ -54,9 +54,9 @@ export default function TransactionsTable() {
                         <td>{t.cost || 0}</td>
                         <td>{t.payment || 0}</td>
                         <td>
-                            {(finalAmount += isNaN(t.payment - t.cost))
+                            {(finalAmount += isNaN(t.cost - t.payment))
                                 ? 0
-                                : t.payment - t.cost}
+                                : (finalAmount += t.cost - t.payment)}
                         </td>
                         <td>{t.comment}</td>
                         <td>

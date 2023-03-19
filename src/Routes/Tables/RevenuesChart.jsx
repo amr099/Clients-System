@@ -1,0 +1,138 @@
+import React, { useState, useContext, useEffect } from "react";
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { FirebaseContext } from "context/FirebaseContext";
+import Form from "react-bootstrap/Form";
+
+ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LinearScale,
+    LineElement
+);
+
+export default function RevenuesChart() {
+    const [years, setYears] = useState();
+    const [year, setYear] = useState();
+    const [revenues, setRevenues] = useState([]);
+    const { clients, expenses } = useContext(FirebaseContext);
+
+    const getYears = async () => {
+        let years = new Set();
+        await clients?.map((c) => {
+            c.transaction?.map((t) => {
+                years.add(t.date.split("/")[2]);
+            });
+        });
+        setYears([...years]);
+    };
+
+    const getRevenues = async () => {
+        let months = new Map([
+            [1, 0],
+            [2, 0],
+            [3, 0],
+            [4, 0],
+            [5, 0],
+            [6, 0],
+            [7, 0],
+            [8, 0],
+            [9, 0],
+            [10, 0],
+            [11, 0],
+            [12, 0],
+        ]);
+        await clients?.map((c) => {
+            c.transaction?.map((t) => {
+                for (let [k, v] of months.entries()) {
+                    if (
+                        t.date.split("/")[1] == k &&
+                        t.date.split("/")[2] == year
+                    ) {
+                        months.set(k, months.get(k) + Number(t.payment) || 0);
+                    }
+                }
+            });
+        });
+        // await expenses?.map((c) => {
+        //     c.transaction?.map((t) => {
+        //         for (let [k, v] of months.entries()) {
+        //             if (
+        //                 t.date.split("/")[1] == k &&
+        //                 t.date.split("/")[2] == year
+        //             ) {
+        //                 console.log(t.cost);
+        //                 months.set(k, months.get(k) - Number(t.cost) || 0);
+        //                 console.log(months);
+        //             }
+        //         }
+        //     });
+        // });
+        setRevenues([...months.values()]);
+    };
+
+    useEffect(() => {
+        getYears();
+    }, []);
+    useEffect(() => {
+        getRevenues();
+    }, [year]);
+
+    return (
+        <div className='d-flex flex-column col mx-auto w-75 pt-4 custom-table'>
+            <Form.Select
+                className='mb-4'
+                onChange={(e) => {
+                    setYear(e.target.value);
+                }}
+                defaultValue='0'
+            >
+                <option value='0' disabled>
+                    Select year
+                </option>
+                {years?.map((year) => (
+                    <option key={year}>{year}</option>
+                ))}
+            </Form.Select>
+            <Line
+                datasetIdKey='id'
+                data={{
+                    labels: [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                    ],
+                    datasets: [
+                        {
+                            id: 1,
+                            label: "Revenues",
+                            data: revenues,
+                        },
+                    ],
+                }}
+            />
+        </div>
+    );
+}

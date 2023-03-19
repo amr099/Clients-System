@@ -16,7 +16,9 @@ export default function ExpensesForm() {
             cost: data.expcost,
             expense: data.expense,
             comment: data.comment,
-            date: data.date,
+            date: `${new Date(data.date).getDate()}/${
+                new Date(data.date).getMonth() + 1
+            }/${new Date(data.date).getFullYear()}`,
         };
 
         let clientRef = await doc(db, "Expenses", data.clientName);
