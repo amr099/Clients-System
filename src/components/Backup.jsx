@@ -7,9 +7,8 @@ export default function Backup() {
 
     return (
         <>
-            <Button
-                type='primary'
-                className='mx-auto'
+            <button
+                className='w-100 backup'
                 onClick={() => {
                     navigator.clipboard.writeText(
                         `Clients : ${JSON.stringify(
@@ -24,7 +23,7 @@ export default function Backup() {
                 }}
             >
                 Backup
-            </Button>
+            </button>
         </>
     );
 }

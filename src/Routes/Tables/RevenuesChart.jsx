@@ -12,6 +12,8 @@ import {
 import { Line } from "react-chartjs-2";
 import { FirebaseContext } from "context/FirebaseContext";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
+import Container from "react-bootstrap/Container";
 
 ChartJS.register(
     ArcElement,
@@ -92,47 +94,52 @@ export default function RevenuesChart() {
     }, [year]);
 
     return (
-        <div className='d-flex flex-column col mx-auto w-75 pt-4 custom-table'>
-            <Form.Select
-                className='mb-4'
-                onChange={(e) => {
-                    setYear(e.target.value);
-                }}
-                defaultValue='0'
-            >
-                <option value='0' disabled>
-                    Select year
-                </option>
-                {years?.map((year) => (
-                    <option key={year}>{year}</option>
-                ))}
-            </Form.Select>
-            <Line
-                datasetIdKey='id'
-                data={{
-                    labels: [
-                        "January",
-                        "February",
-                        "March",
-                        "April",
-                        "May",
-                        "June",
-                        "July",
-                        "August",
-                        "September",
-                        "October",
-                        "November",
-                        "December",
-                    ],
-                    datasets: [
-                        {
-                            id: 1,
-                            label: "Revenues",
-                            data: revenues,
-                        },
-                    ],
-                }}
-            />
-        </div>
+        <>
+            <Alert variant='primary m-4'>
+                <h2>Revenues</h2>
+            </Alert>
+            <Container className='w-90 mx-auto mt-4'>
+                <Form.Select
+                    className='mb-4'
+                    onChange={(e) => {
+                        setYear(e.target.value);
+                    }}
+                    defaultValue='0'
+                >
+                    <option value='0' disabled>
+                        Select year
+                    </option>
+                    {years?.map((year) => (
+                        <option key={year}>{year}</option>
+                    ))}
+                </Form.Select>
+                <Line
+                    datasetIdKey='id'
+                    data={{
+                        labels: [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December",
+                        ],
+                        datasets: [
+                            {
+                                id: 1,
+                                label: "Revenues",
+                                data: revenues,
+                            },
+                        ],
+                    }}
+                />
+            </Container>
+        </>
     );
 }

@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import { FirebaseContext } from "context/FirebaseContext";
 import { useForm } from "react-hook-form";
 import { db } from "firebase-config";
+import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 
 export default function ServicesList() {
     const { register, handleSubmit } = useForm();
@@ -35,41 +37,44 @@ export default function ServicesList() {
     };
 
     return (
-        <div className='d-flex flex-column mx-auto mt-4 w-50'>
-            <form
-                className='row g-3 needs-validation'
-                onSubmit={handleSubmit(addService)}
-            >
-                <h1 className='alert alert-warning'> Edit Services List</h1>
-                <div className='d-flex flex-wrap mb-4'>
-                    <div className='mb-1 w-50'>
-                        <Form.Group className='mb-3'>
-                            <Form.Label>New Service</Form.Label>
-                            <Form.Control
-                                {...register("newService", { required: true })}
-                            />
-                        </Form.Group>
-                        <Button type='submit' variant='primary'>
-                            Add
+        <>
+            <Alert className='alert alert-primary'>
+                <h2>Edit Services List</h2>
+            </Alert>
+            <Container className='w-50 mx-auto mt-4'>
+                <form className='row g-3' onSubmit={handleSubmit(addService)}>
+                    <div className='d-flex flex-wrap mb-4'>
+                        <div className='mb-1 w-50'>
+                            <Form.Group className='mb-3'>
+                                <Form.Label>New Service</Form.Label>
+                                <Form.Control
+                                    {...register("newService", {
+                                        required: true,
+                                    })}
+                                />
+                            </Form.Group>
+                            <Button type='submit' variant='primary'>
+                                Add
+                            </Button>
+                        </div>
+                    </div>
+                </form>
+                <hr />
+                <form onSubmit={(e) => onDelete(e)}>
+                    <div className='w-50 mt-4'>
+                        <Form.Select className='mb-3'>
+                            {services?.map((s) => (
+                                <option key={s.name} value={s.name}>
+                                    {s.name}{" "}
+                                </option>
+                            ))}
+                        </Form.Select>
+                        <Button type='submit' variant='danger'>
+                            Delete
                         </Button>
                     </div>
-                </div>
-            </form>
-            <hr />
-            <form onSubmit={(e) => onDelete(e)}>
-                <div className='w-50 mt-4'>
-                    <Form.Select className='mb-3'>
-                        {services?.map((s) => (
-                            <option key={s.name} value={s.name}>
-                                {s.name}{" "}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    <Button type='submit' variant='danger'>
-                        Delete
-                    </Button>
-                </div>
-            </form>
-        </div>
+                </form>
+            </Container>
+        </>
     );
 }

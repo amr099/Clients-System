@@ -10,72 +10,44 @@ label > span {
     color: red;
 }
 
-.custom-form,
-.custom-table {
-    height: 100vh;
-    overflow: auto;
+nav {
+    margin: 2rem;
 }
 
-.sidenav {
-    background-color: #2b613c;
-    padding: 2rem 0 0 2rem;
-    font-size: 1.2rem;
-    overflow: auto;
-    height: 100vh;
+.outlet {
+    background-color: #f6f1f1;
 }
 
-.sidenav > h2 {
-    font-size: 2rem;
-    padding: 0px;
-    margin-bottom: 1rem;
-    color: antiquewhite;
+h3 {
+    color: #dff6ff;
 }
 
-.sidenav > h3 {
+.w-90 {
+    width: 90%;
+}
+
+a {
+    all: unset;
+    color: #47b5ff;
     font-size: 1.5rem;
-}
-
-.sidenav > h3:hover {
-    cursor: pointer;
-}
-
-.sidenav > *:not(hr, h2) {
-    text-decoration: none;
-    color: #569a7e;
     padding: 1rem;
     border-radius: 10px;
-    width: 90%;
+}
+a:hover,
+.backup {
+    color: #fff;
+    font-size: 1.5rem;
     font-weight: bold;
-}
-
-.sidenav > a:hover,
-.sidenav > h3:hover {
-    background-color: #387857;
-    color: #81caac;
-}
-
-.sidenav > i {
-    font-size: 3rem;
-    color: #afeecd;
-}
-
-.sidenav > i:hover {
-    color: #387857;
+    background-color: #47b5ff;
     cursor: pointer;
 }
 
-@media (max-width: 764px) {
-    .sidenav > h2,
-    a > span {
-        display: none;
-    }
-    .sidenav > h3 {
-        font-size: 1rem;
-    }
-    .sidenav > * {
-        text-align: center;
-    }
-    .sidenav i {
-        font-size: 2rem;
-    }
+.backup {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.backup:hover {
+    background-color: #146c94;
 }

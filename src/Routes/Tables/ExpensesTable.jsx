@@ -89,5 +89,7 @@ export default function ExpensesTable() {
         </Table>
     );
 
-    return <CustomTable setName={setName} table={table} />;
+    return (
+        <CustomTable setName={setName} table={table} label='Client Expenses' />
+    );
 }

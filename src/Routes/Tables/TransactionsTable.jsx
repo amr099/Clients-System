@@ -100,5 +100,11 @@ export default function TransactionsTable() {
         getTransactions();
     }, [name]);
 
-    return <CustomTable setName={setName} table={table} />;
+    return (
+        <CustomTable
+            setName={setName}
+            table={table}
+            label='Client Transactions'
+        />
+    );
 }
