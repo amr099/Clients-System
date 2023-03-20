@@ -38,10 +38,10 @@ export default function ServicesList() {
 
     return (
         <>
-            <Alert className='alert alert-primary'>
+            <Alert className='alert alert-primary m-4'>
                 <h2>Edit Services List</h2>
             </Alert>
-            <Container className='w-50 mx-auto mt-4'>
+            <Container className='w-75 mx-auto mt-4'>
                 <form className='row g-3' onSubmit={handleSubmit(addService)}>
                     <div className='d-flex flex-wrap mb-4'>
                         <div className='mb-1 w-50'>
@@ -61,7 +61,7 @@ export default function ServicesList() {
                 </form>
                 <hr />
                 <form onSubmit={(e) => onDelete(e)}>
-                    <div className='w-50 mt-4'>
+                    <div className='w-75 mt-4'>
                         <Form.Select className='mb-3'>
                             {services?.map((s) => (
                                 <option key={s.name} value={s.name}>

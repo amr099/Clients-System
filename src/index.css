@@ -10,6 +10,9 @@ label > span {
     color: red;
 }
 
+.nav-col {
+    background-color: #1363df;
+}
 nav {
     margin: 2rem;
 }
@@ -50,4 +53,17 @@ a:hover,
 
 .backup:hover {
     background-color: #146c94;
+}
+
+@media (max-width: 768px) {
+    nav {
+        margin: 0;
+    }
+    nav span,
+    .backup {
+        font-size: x-small;
+    }
+    .form-container {
+        width: 90% !important;
+    }
 }

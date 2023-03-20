@@ -25,7 +25,7 @@ export default function CustomForm({
             <Alert variant='primary m-4'>
                 <h2>{label}</h2>
             </Alert>
-            <Container className='w-50 mx-auto mt-4'>
+            <Container className='w-50 mx-auto mt-4 form-container'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {inputs?.find((i) => i === "newClientName") && (
                         <Form.Group className='mb-3'>
