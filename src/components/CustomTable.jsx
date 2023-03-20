@@ -51,7 +51,7 @@ export default function CustomTable({ setName, table, label }) {
                     ))}
                 </Form.Select>
                 {clientData && (
-                    <Table striped hover variant='dark'>
+                    <Table responsive striped hover variant='dark'>
                         <thead>
                             <tr>
                                 <th scope='col'>Code</th>
