@@ -42,7 +42,7 @@ export default function CustomTable({ setName, table, label }) {
                     defaultValue='0'
                 >
                     <option value='0' disabled>
-                        Choose Client
+                        Select client
                     </option>
                     {clients?.map((c) => (
                         <option key={c.name} value={c.name}>

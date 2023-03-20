@@ -17,7 +17,11 @@ export default function CustomForm({
     onSubmit,
     inputs,
 }) {
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
     const { services, clients } = useContext(FirebaseContext);
 
     return (
@@ -28,50 +32,86 @@ export default function CustomForm({
             <Container className='w-50 mx-auto mt-4 form-container'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {inputs?.find((i) => i === "newClientName") && (
-                        <Form.Group className='mb-3'>
-                            <Form.Label>
-                                Name <span>*</span>
-                            </Form.Label>
-                            <Form.Control
-                                {...register("newClientName", {
-                                    required: true,
-                                })}
-                            />
-                        </Form.Group>
+                        <>
+                            <Form.Group className='mb-3'>
+                                <Form.Label>
+                                    Name <span>*</span>
+                                </Form.Label>
+                                <Form.Control
+                                    {...register("newClientName", {
+                                        required: true,
+                                        pattern: /^[A-Za-z ]+$/i,
+                                    })}
+                                />
+                                {errors.newClientName?.type === "required" && (
+                                    <span className='error'>
+                                        {" "}
+                                        This field is required.
+                                    </span>
+                                )}
+                                {errors.newClientName?.type === "pattern" && (
+                                    <span className='error'>
+                                        {" "}
+                                        Name must contain letters only.
+                                    </span>
+                                )}
+                            </Form.Group>
+                        </>
                     )}
 
                     {inputs?.find((i) => i === "selectClient") && (
-                        <Form.Group className='mb-3'>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Select
-                                {...register("clientName", { required: true })}
-                            >
-                                {clients?.map((c) => (
-                                    <option key={c.name} value={c.name}>
-                                        {c.name}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                        </Form.Group>
+                        <>
+                            <Form.Group className='mb-3'>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Select
+                                    {...register("clientName", {
+                                        required: true,
+                                    })}
+                                >
+                                    {clients?.map((c) => (
+                                        <option key={c.name} value={c.name}>
+                                            {c.name}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                                {errors.clientName?.type === "required" && (
+                                    <span className='error'>
+                                        {" "}
+                                        This field is required
+                                    </span>
+                                )}
+                            </Form.Group>
+                        </>
                     )}
                     {inputs?.find((i) => i === "newClient") && (
                         <>
                             <Row>
                                 <Col>
                                     <Form.Group className='mb-3'>
-                                        <Form.Label>Code</Form.Label>
+                                        <Form.Label>
+                                            Code <span>*</span>
+                                        </Form.Label>
                                         <Form.Control
                                             type='number'
-                                            {...register("code", {})}
+                                            {...register("code", {
+                                                required: true,
+                                            })}
                                         />
+                                        {errors.code?.type === "required" && (
+                                            <span className='error'>
+                                                {" "}
+                                                This field is required.
+                                            </span>
+                                        )}
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className='mb-3'>
                                         <Form.Label>
-                                            Registration Code
+                                            Registration Number
                                         </Form.Label>
                                         <Form.Control
+                                            type='number'
                                             {...register("reg", {})}
                                         />
                                     </Form.Group>
@@ -91,6 +131,12 @@ export default function CustomForm({
                                     </option>
                                 ))}
                             </Form.Select>
+                            {errors.service && (
+                                <span className='error'>
+                                    {" "}
+                                    This field is required
+                                </span>
+                            )}
                         </Form.Group>
                     )}
                     {inputs?.find((i) => i === "cost") && (
@@ -102,6 +148,12 @@ export default function CustomForm({
                                 type='number'
                                 {...register("cost", { required: true })}
                             />
+                            {errors.cost && (
+                                <span className='error'>
+                                    {" "}
+                                    This field is required
+                                </span>
+                            )}
                         </Form.Group>
                     )}
                     {inputs?.find((i) => i === "payment") && (
@@ -113,6 +165,12 @@ export default function CustomForm({
                                 type='number'
                                 {...register("payment", { required: true })}
                             />
+                            {errors.payment && (
+                                <span className='error'>
+                                    {" "}
+                                    This field is required
+                                </span>
+                            )}
                         </Form.Group>
                     )}
                     {inputs?.find((i) => i === "expense") && (
@@ -127,6 +185,12 @@ export default function CustomForm({
                                         required: true,
                                     })}
                                 />
+                                {errors.expcost && (
+                                    <span className='error'>
+                                        {" "}
+                                        This field is required
+                                    </span>
+                                )}
                             </Form.Group>
                             <Form.Group className='mb-3'>
                                 <Form.Label>
@@ -137,6 +201,12 @@ export default function CustomForm({
                                         required: true,
                                     })}
                                 />
+                                {errors.expense && (
+                                    <span className='error'>
+                                        {" "}
+                                        This field is required
+                                    </span>
+                                )}
                             </Form.Group>
                         </>
                     )}
@@ -149,6 +219,12 @@ export default function CustomForm({
                                     type='date'
                                     {...register("date", { required: true })}
                                 />
+                                {errors.date && (
+                                    <span className='error'>
+                                        {" "}
+                                        This field is required
+                                    </span>
+                                )}
                             </Form.Group>
                             <Form.Group className='mb-3'>
                                 <Form.Label>Comment</Form.Label>
@@ -167,7 +243,18 @@ export default function CustomForm({
                             </Form.Group>
                             <Form.Group className='mb-3'>
                                 <Form.Label>Phone</Form.Label>
-                                <Form.Control {...register("phone", {})} />
+                                <Form.Control
+                                    {...register("phone", {
+                                        pattern:
+                                            /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
+                                    })}
+                                />
+                                {errors.date?.type === "pattern" && (
+                                    <span className='error'>
+                                        {" "}
+                                        Phone Number must not have letters
+                                    </span>
+                                )}
                             </Form.Group>
                         </>
                     )}
@@ -186,11 +273,14 @@ export default function CustomForm({
                         </Toast>
                     )}
                     {loading ? (
-                        <Button variant='primary' disabled>
+                        <Button variant='primary w-100 mt-3' disabled>
                             Loading…
                         </Button>
                     ) : (
-                        <Button variant='outline-primary w-100' type='submit'>
+                        <Button
+                            variant='outline-primary w-100 mt-3'
+                            type='submit'
+                        >
                             Submit
                         </Button>
                     )}

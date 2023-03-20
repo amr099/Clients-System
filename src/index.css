@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -6,15 +11,17 @@ label {
     font-weight: bold;
 }
 
-label > span {
+label > span,
+.error {
     color: red;
 }
 
 .nav-col {
     background-color: #1363df;
+    min-height: 100vh;
 }
 nav {
-    margin: 2rem;
+    padding: 2rem;
 }
 
 .outlet {

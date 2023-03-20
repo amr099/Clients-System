@@ -12,10 +12,10 @@ import ServicesList from "./Routes/Forms/ServicesList";
 import TransactionsTable from "./Routes/Tables/TransactionsTable";
 import RevenuesTable from "./Routes/Tables/RevenuesTable";
 import ExpensesTable from "Routes/Tables/ExpensesTable";
-import RevenuesChart from "./Routes/Tables/RevenuesChart";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
+import RevenuesChart from "./Routes/Tables/RevenuesChart";
 
 const router = createBrowserRouter([
     {
