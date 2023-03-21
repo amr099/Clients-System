@@ -38,7 +38,7 @@ export default function ServicesList() {
 
     return (
         <>
-            <Alert className='alert alert-primary p-4'>
+            <Alert className='alert alert-primary m-4'>
                 <h2>Edit Services List</h2>
             </Alert>
             <Container className='w-75 mx-auto mt-4'>

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { FirebaseContext } from "context/FirebaseContext";
-import Button from "react-bootstrap/Button";
 
 export default function Backup() {
     const { clients, services, expenses } = useContext(FirebaseContext);
@@ -22,7 +21,8 @@ export default function Backup() {
                     );
                 }}
             >
-                Backup
+                <i class='bi bi-cloud-download'></i>
+                <span>Backup</span>
             </button>
         </>
     );

@@ -12,14 +12,14 @@ export default function CustomTable({ setName, table, label }) {
     const { clients } = useContext(FirebaseContext);
     const [clientData, setClientData] = useState();
 
-    const onChange = async (name) => {
-        await onSnapshot(doc(db, "Clients", name), (doc) => {
+    const onChange = (name) => {
+        onSnapshot(doc(db, "Clients", name), (doc) => {
             setName(name);
             setClientData(doc.data());
         });
     };
 
-    const onDelete = async (client) => {
+    const onDelete = (client) => {
         const res = window.confirm(
             `Are you sure about deleting Client: ${client} ? `
         );

@@ -3,6 +3,10 @@ body {
     padding: 0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -21,7 +25,7 @@ label > span,
     min-height: 100vh;
 }
 nav {
-    padding: 2rem;
+    padding: 5%;
 }
 
 .outlet {
@@ -40,7 +44,7 @@ a {
     all: unset;
     color: #47b5ff;
     font-size: 1.5rem;
-    padding: 1rem;
+    /* padding: 1rem; */
     border-radius: 10px;
 }
 a:hover,
@@ -55,7 +59,8 @@ a:hover,
 .backup {
     border: none;
     border-radius: 10px;
-    padding: 10px;
+    font-size: 1.2rem;
+    /* padding: 10px; */
 }
 
 .backup:hover {
@@ -66,9 +71,11 @@ a:hover,
     nav {
         margin: 0;
     }
-    nav span,
-    .backup {
-        font-size: x-small;
+    nav span {
+        display: none;
+    }
+    nav {
+        text-align: center;
     }
     .form-container {
         width: 90% !important;

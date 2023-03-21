@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Backup from "./Backup";
 import Stack from "react-bootstrap/Stack";
@@ -21,7 +21,7 @@ export default function Nav() {
                         <i className='bi bi-wallet'></i> <span>Payment</span>
                     </Link>
                     <Link to='expense'>
-                        <i className='bi bi-cash-coin'></i> <span>Expense</span>
+                        <i className='bi bi-coin'></i> <span>Expense</span>
                     </Link>
                 </Stack>
             </Container>
@@ -34,7 +34,7 @@ export default function Nav() {
                         <span>Transactions</span>
                     </Link>
                     <Link to='expenses'>
-                        <i className='bi bi-bar-chart'></i>{" "}
+                        <i className='bi bi-cash-coin'></i>{" "}
                         <span>Expnenes</span>
                     </Link>
                     {/* <Link to='revenues'>

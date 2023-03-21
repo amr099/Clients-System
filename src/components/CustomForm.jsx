@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
+import { FirebaseContext } from "context/FirebaseContext";
+import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Toast from "react-bootstrap/Toast";
-import { useForm } from "react-hook-form";
-import { FirebaseContext } from "context/FirebaseContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -17,12 +17,12 @@ export default function CustomForm({
     onSubmit,
     inputs,
 }) {
+    const { services, clients } = useContext(FirebaseContext);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const { services, clients } = useContext(FirebaseContext);
 
     return (
         <>
@@ -214,7 +214,9 @@ export default function CustomForm({
                     {inputs?.find((i) => i === "dateAndComment") && (
                         <>
                             <Form.Group className='mb-3'>
-                                <Form.Label>Date</Form.Label>
+                                <Form.Label>
+                                    Date <span>*</span>
+                                </Form.Label>
                                 <Form.Control
                                     type='date'
                                     {...register("date", { required: true })}
