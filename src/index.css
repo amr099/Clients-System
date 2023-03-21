@@ -44,7 +44,7 @@ a {
     all: unset;
     color: #47b5ff;
     font-size: 1.5rem;
-    /* padding: 1rem; */
+    padding: 0.5rem;
     border-radius: 10px;
 }
 a:hover,
