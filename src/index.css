@@ -3,10 +3,6 @@ body {
     padding: 0;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
@@ -60,7 +56,6 @@ a:hover,
     border: none;
     border-radius: 10px;
     font-size: 1.2rem;
-    /* padding: 10px; */
 }
 
 .backup:hover {

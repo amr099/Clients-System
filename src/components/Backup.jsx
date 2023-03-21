@@ -21,8 +21,7 @@ export default function Backup() {
                     );
                 }}
             >
-                <i class='bi bi-cloud-download'></i>
-                <span>Backup</span>
+                <i class='bi bi-cloud-download'></i> <span>Backup</span>
             </button>
         </>
     );
