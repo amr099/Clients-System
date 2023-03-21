@@ -6,10 +6,10 @@ import Col from "react-bootstrap/Col";
 export default function Home() {
     return (
         <Row>
-            <Col xl={3} xs={4} className='nav-col'>
+            <Col xs={3} className='nav-col'>
                 <Nav />
             </Col>
-            <Col xl={9} xs={8}>
+            <Col xs={9}>
                 <Outlet className='outlet' />
             </Col>
         </Row>
