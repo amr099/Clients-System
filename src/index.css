@@ -65,12 +65,13 @@ a:hover,
 @media (max-width: 768px) {
     nav {
         margin: 0;
+        text-align: center;
+    }
+    nav a {
+        padding: 0;
     }
     nav span {
-        display: none;
-    }
-    nav {
-        text-align: center;
+        font-size: xx-small;
     }
     .form-container {
         width: 90% !important;
