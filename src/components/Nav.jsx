@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 
 export default function Nav() {
     return (
+        // <Container>
         <nav>
             <h3>New</h3>
             <Container>
@@ -64,5 +65,6 @@ export default function Nav() {
                 </Stack>
             </Container>
         </nav>
+        // </Container>
     );
 }

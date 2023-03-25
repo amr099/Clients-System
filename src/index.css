@@ -8,6 +8,7 @@ label > span,
 }
 nav {
     padding: 10%;
+    min-height: 100vh;
 }
 .nav-col {
     background-color: #1363df;
@@ -58,6 +59,8 @@ a > span {
     }
     nav span {
         font-size: xx-small;
+        text-align: center;
+        margin: 0;
     }
     .form-container {
         width: 90% !important;
