@@ -245,12 +245,7 @@ export default function CustomForm({
                             </Form.Group>
                             <Form.Group className='mb-3'>
                                 <Form.Label>Phone</Form.Label>
-                                <Form.Control
-                                    {...register("phone", {
-                                        pattern:
-                                            /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
-                                    })}
-                                />
+                                <Form.Control {...register("phone", {})} />
                                 {errors.date?.type === "pattern" && (
                                     <span className='error'>
                                         {" "}

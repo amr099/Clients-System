@@ -28,11 +28,11 @@ a {
     font-size: 1.5rem;
     padding: 0.5rem;
     border-radius: 10px;
+    transition: all 0.1s ease-in-out;
 }
 a:hover,
 .backup {
     color: #fff;
-    font-size: 1.5rem;
     font-weight: bold;
     background-color: #47b5ff;
     cursor: pointer;
@@ -49,15 +49,36 @@ a > span {
     background-color: #146c94;
 }
 
+@media (max-width: 1200px) {
+    a > i,
+    a > span,
+    .backup {
+        font-size: small;
+        text-align: center;
+        margin: 0;
+    }
+    .form-container {
+        width: 90% !important;
+    }
+}
+
 @media (max-width: 768px) {
     nav {
         margin: 0;
+        padding: 10px 0;
         text-align: center;
+        text-overflow: ellipsis;
     }
-    nav a {
+    h3 {
+        font-size: 0.8rem;
+    }
+    a {
+        font-size: 0.5rem;
         padding: 0;
     }
-    nav span {
+    a > i,
+    a > span,
+    .backup {
         font-size: xx-small;
         text-align: center;
         margin: 0;
