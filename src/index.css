@@ -67,7 +67,6 @@ a > span {
         margin: 0;
         padding: 10px 0;
         text-align: center;
-        text-overflow: ellipsis;
     }
     h3 {
         font-size: 0.8rem;
@@ -80,10 +79,5 @@ a > span {
     a > span,
     .backup {
         font-size: xx-small;
-        text-align: center;
-        margin: 0;
-    }
-    .form-container {
-        width: 90% !important;
     }
 }
