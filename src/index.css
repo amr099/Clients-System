@@ -78,6 +78,6 @@ a > span {
     a > i,
     a > span,
     .backup {
-        font-size: xx-small;
+        font-size: 0.3rem;
     }
 }

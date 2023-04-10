@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 
 export default function ExpensesTable() {
     const [name, setName] = useState();
-    const [transactions, setTransactions] = useState();
+    const [transactions, setTransactions] = useState([]);
 
     const onDelete = async (t) => {
         const res = window.confirm(
@@ -29,19 +29,25 @@ export default function ExpensesTable() {
 
     useEffect(() => {
         const getExpenses = () => {
-            onSnapshot(doc(db, "Expenses", name), (doc) => {
-                let sortedTransactions = doc
-                    .data()
-                    ?.transaction.sort((a, b) => {
-                        let dateA = a.date.split("/");
-                        let dateB = b.date.split("/");
-                        dateA = new Date(`${dateA[1]}/${dateA[0]}/${dateA[2]}`);
-                        dateB = new Date(`${dateB[1]}/${dateB[0]}/${dateB[2]}`);
+            if (name) {
+                onSnapshot(doc(db, "Expenses", name), (doc) => {
+                    let sortedTransactions = doc
+                        ?.data()
+                        ?.transaction.sort((a, b) => {
+                            let dateA = a.date.split("/");
+                            let dateB = b.date.split("/");
+                            dateA = new Date(
+                                `${dateA[1]}/${dateA[0]}/${dateA[2]}`
+                            );
+                            dateB = new Date(
+                                `${dateB[1]}/${dateB[0]}/${dateB[2]}`
+                            );
 
-                        return dateA - dateB;
-                    });
-                setTransactions(sortedTransactions);
-            });
+                            return dateA - dateB;
+                        });
+                    setTransactions(sortedTransactions);
+                });
+            }
         };
         getExpenses();
     }, [name]);
@@ -57,8 +63,8 @@ export default function ExpensesTable() {
                 </tr>
             </thead>
             <tbody>
-                {transactions?.map((t, index) => (
-                    <tr key={index}>
+                {transactions?.map((t) => (
+                    <tr>
                         <td>{t.date}</td>
                         <td>{t.expense}</td>
                         <td>{t.cost || 0}</td>

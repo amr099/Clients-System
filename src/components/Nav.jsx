@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Backup from "./Backup";
 import Stack from "react-bootstrap/Stack";
-import Container from "react-bootstrap/Container";
 
 export default function Nav() {
     return (
         <nav>
-            <h1>Dashboard</h1>
             <h3>New</h3>
             <Stack gap={3}>
                 <Link to='client'>
