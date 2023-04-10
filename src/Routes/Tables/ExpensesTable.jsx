@@ -9,7 +9,7 @@ export default function ExpensesTable() {
     const [name, setName] = useState();
     const [transactions, setTransactions] = useState();
 
-    const onDelete = async (date, expense, cost, comment) => {
+    const onDelete = async (t) => {
         const res = window.confirm(
             "Are you sure aboue deleting this transaction ?"
         );
@@ -17,12 +17,7 @@ export default function ExpensesTable() {
             try {
                 const ClientDoc = doc(db, "Expenses", name);
                 updateDoc(ClientDoc, {
-                    transaction: arrayRemove({
-                        comment: comment,
-                        cost: cost,
-                        date: date,
-                        expense: expense,
-                    }),
+                    transaction: arrayRemove(t),
                 });
             } catch (e) {
                 console.log(e);
@@ -33,8 +28,8 @@ export default function ExpensesTable() {
     };
 
     useEffect(() => {
-        const getExpenses = async () => {
-            await onSnapshot(doc(db, "Expenses", name), (doc) => {
+        const getExpenses = () => {
+            onSnapshot(doc(db, "Expenses", name), (doc) => {
                 let sortedTransactions = doc
                     .data()
                     ?.transaction.sort((a, b) => {
@@ -71,14 +66,7 @@ export default function ExpensesTable() {
                         <td>
                             <Button
                                 variant='danger'
-                                onClick={() =>
-                                    onDelete(
-                                        t.date,
-                                        t.expense,
-                                        t.cost,
-                                        t.comment
-                                    )
-                                }
+                                onClick={() => onDelete(t)}
                             >
                                 <i className='bi bi-trash'></i>
                             </Button>

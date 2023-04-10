@@ -8,7 +8,7 @@ import Table from "react-bootstrap/Table";
 export default function TransactionsTable() {
     const [name, setName] = useState();
     const [transactions, setTransactions] = useState();
-    const onDelete = async (date, service, cost, payment, comment) => {
+    const onDelete = async (t) => {
         const res = window.confirm(
             "Are you sure aboue deleting this transaction ?"
         );
@@ -16,13 +16,7 @@ export default function TransactionsTable() {
             try {
                 const ClientDoc = doc(db, "Clients", name);
                 updateDoc(ClientDoc, {
-                    transaction: arrayRemove({
-                        date: date,
-                        service: service,
-                        cost: cost,
-                        payment: payment,
-                        comment: comment,
-                    }),
+                    transaction: arrayRemove(t),
                 });
             } catch (e) {
                 console.log(e);
@@ -62,15 +56,7 @@ export default function TransactionsTable() {
                         <td>
                             <Button
                                 variant='danger'
-                                onClick={() =>
-                                    onDelete(
-                                        t.date,
-                                        t.service,
-                                        t.cost,
-                                        t.payment,
-                                        t.comment
-                                    )
-                                }
+                                onClick={() => onDelete(t)}
                             >
                                 <i className='bi bi-trash'></i>
                             </Button>
