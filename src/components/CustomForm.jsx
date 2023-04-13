@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FirebaseContext } from "context/FirebaseContext";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
@@ -23,6 +23,10 @@ export default function CustomForm({
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { doc, deleteDoc, setDoc } from "firebase/firestore";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -14,6 +14,11 @@ import Col from "react-bootstrap/Col";
 export default function ServicesList() {
     const { register, handleSubmit } = useForm();
     const { services } = useContext(FirebaseContext);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const addService = async (data) => {
         try {
             setDoc(doc(db, "Services", data.newService), {

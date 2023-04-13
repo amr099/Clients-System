@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { FirebaseContext } from "context/FirebaseContext";
 import { db } from "firebase-config";
@@ -11,6 +11,10 @@ import Container from "react-bootstrap/Container";
 export default function CustomTable({ setName, table, label }) {
     const { clients } = useContext(FirebaseContext);
     const [clientData, setClientData] = useState();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const onChange = (name) => {
         onSnapshot(doc(db, "Clients", name), (doc) => {
