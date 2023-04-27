@@ -55,11 +55,11 @@ const router = createBrowserRouter([
                 element: <RevenuesChart />,
             },
             {
-                path: "/clientinfo",
+                path: "/client info",
                 element: <ClientInfoForm />,
             },
             {
-                path: "/serviceslist",
+                path: "/services list",
                 element: <ServicesList />,
             },
         ],

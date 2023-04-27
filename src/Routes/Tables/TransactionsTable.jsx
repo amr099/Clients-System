@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { arrayRemove, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
@@ -67,23 +67,23 @@ export default function TransactionsTable() {
         </Table>
     );
 
-    useEffect(() => {
-        const getTransactions = async () => {
-            await onSnapshot(doc(db, "Clients", name), (doc) => {
-                let sortedTransactions = doc
-                    .data()
-                    ?.transaction.sort((a, b) => {
-                        let dateA = a.date.split("/");
-                        let dateB = b.date.split("/");
-                        dateA = new Date(`${dateA[1]}/${dateA[0]}/${dateA[2]}`);
-                        dateB = new Date(`${dateB[1]}/${dateB[0]}/${dateB[2]}`);
+    const getTransactions = () => {
+        onSnapshot(doc(db, "Clients", name), (doc) => {
+            let sortedTransactions = doc?.data()?.transaction.sort((a, b) => {
+                let dateA = a.date.split("/");
+                let dateB = b.date.split("/");
+                dateA = new Date(`${dateA[1]}/${dateA[0]}/${dateA[2]}`);
+                dateB = new Date(`${dateB[1]}/${dateB[0]}/${dateB[2]}`);
 
-                        return dateA - dateB;
-                    });
-                setTransactions(sortedTransactions);
+                return dateA - dateB;
             });
-        };
-        getTransactions();
+            setTransactions(sortedTransactions);
+        });
+    };
+    useEffect(() => {
+        if (name) {
+            getTransactions();
+        }
     }, [name]);
 
     return (

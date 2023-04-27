@@ -28,15 +28,15 @@ export default function RevenuesTable() {
     );
 
     useEffect(() => {
-        const getRevenues = async () => {
-            await onSnapshot(doc(db, "Clients", name), (doc) => {
+        const getRevenues = () => {
+            onSnapshot(doc(db, "Clients", name), (doc) => {
                 setRevenue(0);
                 let r = 0;
                 doc.data().transaction?.map((t) => (r += Number(t.payment)));
                 setRevenue(r);
             });
 
-            await onSnapshot(doc(db, "Expenses", name), (doc) => {
+            onSnapshot(doc(db, "Expenses", name), (doc) => {
                 setExpenses(0);
                 let e = 0;
                 doc.data().transaction?.map((t) => (e += Number(t.cost)));

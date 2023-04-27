@@ -1,55 +1,80 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Backup from "./Backup";
 import Stack from "react-bootstrap/Stack";
+import CustomLink from "./Link";
 
 export default function Nav() {
+    const [active, setActive] = useState("");
+    const onClick = (e) => {
+        console.log(e.target.name);
+        setActive(e.target.name);
+    };
     return (
         <nav>
             <h3>New</h3>
             <Stack gap={3}>
-                <Link to='client'>
-                    <i className='bi bi-person-plus'></i> <span>Client</span>
-                </Link>
-                <Link to='transaction'>
-                    <i className='bi bi-stack'></i> <span>Transaction</span>
-                </Link>
-                <Link to='payment'>
-                    <i className='bi bi-wallet'></i> <span>Payment</span>
-                </Link>
-                <Link to='expense'>
-                    <i className='bi bi-coin'></i> <span>Expense</span>
-                </Link>
+                <CustomLink
+                    name={"Client"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-person-plus"}
+                />
+                <CustomLink
+                    name={"Transaction"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-stack"}
+                />
+                <CustomLink
+                    name={"Payment"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-wallet"}
+                />
+                <CustomLink
+                    name={"Expense"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-coin"}
+                />
             </Stack>
             <hr />
             <h3>View</h3>
             <Stack gap={3}>
-                <Link to='transactions'>
-                    <i className='bi bi-card-list'></i>{" "}
-                    <span>Transactions</span>
-                </Link>
-                <Link to='expenses'>
-                    <i className='bi bi-cash-coin'></i> <span>Expnenes</span>
-                </Link>
-                {/* <Link to='revenues'>
-                        <i className='bi bi-bar-chart'></i>{" "}
-                        <span>Revenues</span>
-                    </Link> */}
-                <Link to='revenueschart'>
-                    <i className='bi bi-bar-chart'></i> <span>Revenues</span>
-                </Link>
+                <CustomLink
+                    name={"Transactions"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-card-list"}
+                />
+                <CustomLink
+                    name={"Expenses"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-cash-coin"}
+                />
+                <CustomLink
+                    name={"RevenuesChart"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-bar-chart"}
+                />
             </Stack>
             <hr />
             <h3>Edit</h3>
             <Stack gap={3}>
-                <Link to='clientinfo'>
-                    <i className='bi bi-pencil-square'></i>{" "}
-                    <span>Client Info.</span>
-                </Link>
-                <Link to='serviceslist'>
-                    <i className='bi bi-file-earmark-text'></i>{" "}
-                    <span>Services List</span>
-                </Link>
+                <CustomLink
+                    name={"Client Info"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-pencil-square"}
+                />
+                <CustomLink
+                    name={"Services List"}
+                    active={active}
+                    onClick={onClick}
+                    icon={"bi bi-file-earmark-text"}
+                />
                 <hr />
                 <Backup />
             </Stack>

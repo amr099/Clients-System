@@ -30,8 +30,9 @@ a {
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
 }
-a:hover,
-.backup {
+.selected,
+.backup,
+a:hover {
     color: #fff;
     font-weight: bold;
     background-color: #47b5ff;
