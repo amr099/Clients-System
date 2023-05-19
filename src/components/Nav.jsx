@@ -12,7 +12,7 @@ export default function Nav() {
     return (
         <nav>
             <h3>New</h3>
-            <Stack gap={3}>
+            <Stack gap={3} className='link-stack'>
                 <CustomLink
                     name={"Client"}
                     active={active}
@@ -40,7 +40,7 @@ export default function Nav() {
             </Stack>
             <hr />
             <h3>View</h3>
-            <Stack gap={3}>
+            <Stack gap={3} className='link-stack'>
                 <CustomLink
                     name={"Transactions"}
                     active={active}
@@ -62,7 +62,7 @@ export default function Nav() {
             </Stack>
             <hr />
             <h3>Edit</h3>
-            <Stack gap={3}>
+            <Stack gap={3} className='link-stack'>
                 <CustomLink
                     name={"Client Info"}
                     active={active}
