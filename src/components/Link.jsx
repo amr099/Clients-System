@@ -7,7 +7,7 @@ export default function CustomLink({ name, active, icon, onClick }) {
             to={name}
             onClick={onClick}
             name={name}
-            className={active === name && "selected"}
+            className={"d-flex no-wrap" + active === name && "selected"}
         >
             <i className={icon}></i> <span>{name}</span>
         </Link>
