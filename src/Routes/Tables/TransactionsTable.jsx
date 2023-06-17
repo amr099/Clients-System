@@ -6,8 +6,8 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
 export default function TransactionsTable() {
-    const [name, setName] = useState();
-    const [transactions, setTransactions] = useState();
+    const [name, setName] = useState("");
+    const [transactions, setTransactions] = useState([]);
     const onDelete = async (t) => {
         const res = window.confirm(
             "Are you sure aboue deleting this transaction ?"
@@ -24,7 +24,6 @@ export default function TransactionsTable() {
         } else {
             return;
         }
-        console.log("deleted");
     };
 
     let finalAmount = 0;
@@ -47,11 +46,7 @@ export default function TransactionsTable() {
                         <td>{t.service}</td>
                         <td>{t.cost || 0}</td>
                         <td>{t.payment || 0}</td>
-                        <td>
-                            {(finalAmount += isNaN(t.cost - t.payment))
-                                ? 0
-                                : (finalAmount += t.cost - t.payment)}
-                        </td>
+                        <td>{(finalAmount += t.cost - t.payment)}</td>
                         <td>{t.comment}</td>
                         <td>
                             <Button
@@ -67,23 +62,29 @@ export default function TransactionsTable() {
         </Table>
     );
 
-    const getTransactions = () => {
-        onSnapshot(doc(db, "Clients", name), (doc) => {
-            let sortedTransactions = doc?.data()?.transaction.sort((a, b) => {
-                let dateA = a.date.split("/");
-                let dateB = b.date.split("/");
-                dateA = new Date(`${dateA[1]}/${dateA[0]}/${dateA[2]}`);
-                dateB = new Date(`${dateB[1]}/${dateB[0]}/${dateB[2]}`);
-
-                return dateA - dateB;
-            });
-            setTransactions(sortedTransactions);
-        });
-    };
     useEffect(() => {
-        if (name) {
-            getTransactions();
-        }
+        const getTransactions = () => {
+            if (name) {
+                onSnapshot(doc(db, "Clients", name), (doc) => {
+                    let sortedTransactions = doc
+                        ?.data()
+                        ?.transaction.sort((a, b) => {
+                            let dateA = a.date.split("/");
+                            let dateB = b.date.split("/");
+                            dateA = new Date(
+                                `${dateA[1]}/${dateA[0]}/${dateA[2]}`
+                            );
+                            dateB = new Date(
+                                `${dateB[1]}/${dateB[0]}/${dateB[2]}`
+                            );
+
+                            return dateA - dateB;
+                        });
+                    setTransactions(sortedTransactions);
+                });
+            }
+        };
+        getTransactions();
     }, [name]);
 
     return (

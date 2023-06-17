@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomForm from "components/CustomForm";
 
-export default function PaymentForm(data) {
-    const [success, setSuccess] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const inputs = ["selectClient", "payment", "dateAndComment"];
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "SUCCESS":
+            return { success: true, loading: false, error: "" };
+        case "LOADING":
+            return { success: false, loading: true, error: "" };
+        case "ERROR":
+            return { success: false, loading: false, error: action.payload };
+    }
+};
 
+export default function PaymentForm() {
+    const [state, dispatch] = useReducer(reducer, {
+        success: false,
+        loading: false,
+        error: "",
+    });
+    const inputs = ["selectClient", "payment", "dateAndComment"];
     const onSubmit = async (data) => {
-        setSuccess(false);
-        setLoading(true);
+        dispatch({ type: "LOADING" });
 
         let newPayment = {
             service: "",
@@ -29,24 +40,21 @@ export default function PaymentForm(data) {
             await updateDoc(clientRef, {
                 transaction: arrayUnion(newPayment),
             });
-            setSuccess(true);
-            setError(false);
-            setLoading(false);
+            dispatch({ type: "SUCCESS" });
         } catch (e) {
             if (
                 e.message ===
                 "No document to update: projects/clients-management-system/databases/(default)/documents/Clients/sada"
             ) {
-                setError("لا يوجد ملف بهذا الاسم");
-
-                setLoading(false);
-                setSuccess(false);
+                dispatch({
+                    type: "ERROR",
+                    payload: "Client's name not found.",
+                });
             } else {
-                console.log(e.message);
-                console.log("error adding new client.");
-                setError(" خطأ");
-                setLoading(false);
-                setSuccess(false);
+                dispatch({
+                    type: "ERROR",
+                    payload: `Error updating client information: ${e.message}`,
+                });
             }
         }
     };
@@ -54,9 +62,7 @@ export default function PaymentForm(data) {
         <CustomForm
             label={"New Payment"}
             onSubmit={onSubmit}
-            error={error}
-            loading={loading}
-            success={success}
+            state={state}
             inputs={inputs}
         />
     );

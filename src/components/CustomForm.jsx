@@ -11,13 +11,14 @@ import Col from "react-bootstrap/Col";
 
 export default function CustomForm({
     label,
-    loading,
-    success,
-    error,
+    // loading,
+    // success,
+    // error,
+    state,
     onSubmit,
     inputs,
 }) {
-    const { services, clients } = useContext(FirebaseContext);
+    const { servicesData, clientsData } = useContext(FirebaseContext);
     const {
         register,
         handleSubmit,
@@ -66,13 +67,20 @@ export default function CustomForm({
                     {inputs?.find((i) => i === "selectClient") && (
                         <>
                             <Form.Group className='mb-3'>
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label>
+                                    Name <span>*</span>
+                                </Form.Label>
                                 <Form.Select
                                     {...register("clientName", {
                                         required: true,
                                     })}
                                 >
-                                    {clients?.map((c) => (
+                                    {clientsData.loading && (
+                                        <option disabled selected>
+                                            Loading ...
+                                        </option>
+                                    )}
+                                    {clientsData?.clients?.map((c) => (
                                         <option key={c.name} value={c.name}>
                                             {c.name}
                                         </option>
@@ -125,11 +133,18 @@ export default function CustomForm({
                     )}
                     {inputs?.find((i) => i === "service") && (
                         <Form.Group className='mb-3'>
-                            <Form.Label>Service</Form.Label>
+                            <Form.Label>
+                                Service <span>*</span>
+                            </Form.Label>
                             <Form.Select
                                 {...register("service", { required: true })}
                             >
-                                {services?.map((s) => (
+                                {servicesData.loading && (
+                                    <option disabled selected>
+                                        Loading ...
+                                    </option>
+                                )}
+                                {servicesData.services?.map((s) => (
                                     <option key={s.name} value={s.name}>
                                         {s.name}
                                     </option>
@@ -259,23 +274,23 @@ export default function CustomForm({
                             </Form.Group>
                         </>
                     )}
-                    {success && (
+                    {state?.success && (
                         <Toast bg='success' autohide='true'>
                             <Toast.Body>
-                                <strong>تم التسجيل</strong>
+                                <strong>Saved.</strong>
                             </Toast.Body>
                         </Toast>
                     )}
-                    {error && (
+                    {state?.error && (
                         <Toast bg='warning' autohide='true'>
                             <Toast.Body>
                                 <strong>{error}</strong>
                             </Toast.Body>
                         </Toast>
                     )}
-                    {loading ? (
+                    {state?.loading ? (
                         <Button variant='primary w-100 mt-3' disabled>
-                            Loading…
+                            Saving…
                         </Button>
                     ) : (
                         <Button

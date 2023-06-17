@@ -13,7 +13,7 @@ import Col from "react-bootstrap/Col";
 
 export default function ServicesList() {
     const { register, handleSubmit } = useForm();
-    const { services } = useContext(FirebaseContext);
+    const { servicesData } = useContext(FirebaseContext);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -73,7 +73,7 @@ export default function ServicesList() {
                     <Row className='mt-4'>
                         <Col xs={10}>
                             <Form.Select className='mb-3'>
-                                {services?.map((s) => (
+                                {servicesData.services?.map((s) => (
                                     <option key={s.name} value={s.name}>
                                         {s.name}{" "}
                                     </option>

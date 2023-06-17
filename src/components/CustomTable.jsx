@@ -9,7 +9,7 @@ import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 
 export default function CustomTable({ setName, table, label }) {
-    const { clients } = useContext(FirebaseContext);
+    const { clientsData } = useContext(FirebaseContext);
     const [clientData, setClientData] = useState();
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export default function CustomTable({ setName, table, label }) {
                     <option value='0' disabled>
                         Select client
                     </option>
-                    {clients?.map((c) => (
+                    {clientsData?.clients?.map((c) => (
                         <option key={c.name} value={c.name}>
                             {c.name}
                         </option>

@@ -1,15 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useReducer, useContext } from "react";
 import { setDoc, doc, arrayUnion } from "firebase/firestore";
 import { FirebaseContext } from "context/FirebaseContext";
 import { db } from "firebase-config";
 import CustomForm from "components/CustomForm";
 
-export default function ClientForm() {
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "SUCCESS":
+            return { success: true, loading: false, error: "" };
+        case "LOADING":
+            return { success: false, loading: true, error: "" };
+        case "ERROR":
+            return { success: false, loading: false, error: action.payload };
+    }
+};
 
-    const { clients } = useContext(FirebaseContext);
+export default function ClientForm() {
+    const [state, dispatch] = useReducer(reducer, {
+        success: false,
+        loading: false,
+        error: "",
+    });
+
+    const { clientsData } = useContext(FirebaseContext);
 
     const inputs = [
         "newClientName",
@@ -22,31 +35,45 @@ export default function ClientForm() {
 
     const onSubmit = async (data) => {
         try {
-            setSuccess(false);
-            setLoading(true);
-
-            if (clients.find((c) => c.name === data.newClientName)) {
-                console.log("this name already used");
-                setError("this name already used");
-                setLoading(false);
-                setSuccess(false);
-
+            dispatch({ type: "LOADING" });
+            if (clientsData.error) {
+                dispatch({
+                    type: "ERROR",
+                    payload: "Can't fetch clients data.",
+                });
                 return;
             }
-            if (clients.find((c) => c.code === data.code)) {
-                console.log("this code already used");
-                setError("الكود موجود بالفعل");
-                setLoading(false);
-                setSuccess(false);
-
-                return;
-            }
-            if (clients.find((c) => c.reg === data.reg)) {
-                console.log("this regestiry code already used");
-                setError("الرقم التسجيلى موجود بالفعل");
-                setLoading(false);
-                setSuccess(false);
-
+            if (!clientsData.loading) {
+                if (
+                    clientsData.clients.find(
+                        (c) => c.name === data.newClientName
+                    )
+                ) {
+                    dispatch({
+                        type: "ERROR",
+                        payload: "Name already exists.",
+                    });
+                    return;
+                }
+                if (clientsData.clients.find((c) => c.code === data.code)) {
+                    dispatch({
+                        type: "ERROR",
+                        payload: "Code already exists.",
+                    });
+                    return;
+                }
+                if (clientsData.clients.find((c) => c.reg === data.reg)) {
+                    dispatch({
+                        type: "ERROR",
+                        payload: "Registeration number already exists.",
+                    });
+                    return;
+                }
+            } else {
+                dispatch({
+                    type: "ERROR",
+                    payload: "Can't fetch clients data.",
+                });
                 return;
             }
 
@@ -69,15 +96,12 @@ export default function ClientForm() {
                 address: data.address,
                 phone: data.phone,
             });
-            setLoading(false);
-            setError(false);
-            setSuccess(true);
+            dispatch({ type: "SUCCESS" });
         } catch (e) {
-            console.log(e.message);
-            console.log("error adding new client.");
-            setError(" خطأ");
-            setLoading(false);
-            setSuccess(false);
+            dispatch({
+                type: "ERROR",
+                payload: setError(`Error adding new client: (${e.message})`),
+            });
         }
     };
 
@@ -85,9 +109,7 @@ export default function ClientForm() {
         <CustomForm
             label={"New Client"}
             onSubmit={onSubmit}
-            error={error}
-            loading={loading}
-            success={success}
+            state={state}
             inputs={inputs}
         />
     );

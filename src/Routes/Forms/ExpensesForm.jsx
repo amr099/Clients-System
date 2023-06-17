@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { updateDoc, doc, arrayUnion, setDoc } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomForm from "components/CustomForm";
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "SUCCESS":
+            return { success: true, loading: false, error: "" };
+        case "LOADING":
+            return { success: false, loading: true, error: "" };
+        case "ERROR":
+            return { success: false, loading: false, error: action.payload };
+    }
+};
+
 export default function ExpensesForm() {
-    const [success, setSuccess] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [state, dispatch] = useReducer(reducer, {
+        success: false,
+        loading: false,
+        error: "",
+    });
     const inputs = ["selectClient", "expense", "dateAndComment"];
 
     const onSubmit = async (data) => {
-        setSuccess(false);
-        setLoading(true);
+        dispatch({ type: "LOADING" });
         let newExpense = {
             cost: data.expcost,
             expense: data.expense,
@@ -26,9 +38,7 @@ export default function ExpensesForm() {
             await updateDoc(clientRef, {
                 transaction: arrayUnion(newExpense),
             });
-            setSuccess(true);
-            setLoading(false);
-            setError(false);
+            dispatch({ type: "SUCCESS" });
         } catch (e) {
             if (
                 e.message.startsWith(
@@ -39,15 +49,12 @@ export default function ExpensesForm() {
                     name: data.clientName,
                     transaction: arrayUnion(newExpense),
                 });
-                setSuccess(true);
-                setLoading(false);
-                setError(false);
+                dispatch({ type: "SUCCESS" });
             } else {
-                console.log(e.message);
-                console.log("error adding new Client Expenses.");
-                setError(" خطأ");
-                setLoading(false);
-                setSuccess(false);
+                dispatch({
+                    type: "ERROR",
+                    payload: `Error adding new expenses: ${e.message}`,
+                });
             }
         }
     };
@@ -56,9 +63,7 @@ export default function ExpensesForm() {
         <CustomForm
             label={"New Expense"}
             onSubmit={onSubmit}
-            error={error}
-            loading={loading}
-            success={success}
+            state={state}
             inputs={inputs}
         />
     );

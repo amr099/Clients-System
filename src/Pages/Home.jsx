@@ -12,7 +12,7 @@ export default function Home() {
                     <Nav />
                 </Col>
                 <Col xs={9}>
-                    <Outlet className='outlet' />
+                    <Outlet className='outlet' prop={"prop..."} />
                 </Col>
             </Row>
         </Container>

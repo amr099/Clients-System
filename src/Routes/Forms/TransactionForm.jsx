@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { db } from "firebase-config";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import CustomForm from "components/CustomForm";
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "SUCCESS":
+            return { success: true, loading: false, error: "" };
+        case "LOADING":
+            return { success: false, loading: true, error: "" };
+        case "ERROR":
+            return { success: false, loading: false, error: action.payload };
+    }
+};
+
 export default function TransactionForm() {
-    const [success, setSuccess] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [state, dispatch] = useReducer(reducer, {
+        success: false,
+        loading: false,
+        error: "",
+    });
     const inputs = [
         "selectClient",
         "payment",
@@ -16,9 +29,7 @@ export default function TransactionForm() {
     ];
 
     const onSubmit = async (data) => {
-        console.log(data);
-        setSuccess(false);
-        setLoading(true);
+        dispatch({ type: "LOADING" });
         try {
             let clientRef = doc(db, "Clients", data.clientName);
 
@@ -33,24 +44,22 @@ export default function TransactionForm() {
                     }/${new Date(data.date).getFullYear()}`,
                 }),
             });
-            setSuccess(true);
-            setError(false);
-            setLoading(false);
+            dispatch({ type: "SUCCESS" });
         } catch (e) {
             if (
                 e.message.startsWith(
                     "No document to update: projects/clients-management-system/databases/(default)/documents/Clients"
                 )
             ) {
-                setError("لا يوجد ملف بهذا الاسم");
-                setLoading(false);
-                setSuccess(false);
+                dispatch({
+                    type: "ERROR",
+                    payload: "Client's name not found.",
+                });
             } else {
-                console.log(e.message);
-                console.log("error adding new client.");
-                setError(" خظأ");
-                setLoading(false);
-                setSuccess(false);
+                dispatch({
+                    type: "ERROR",
+                    payload: `Error adding new transaction: ${e.message}`,
+                });
             }
         }
     };
@@ -59,9 +68,7 @@ export default function TransactionForm() {
         <CustomForm
             label={"New Transaction"}
             onSubmit={onSubmit}
-            loading={loading}
-            success={success}
-            error={error}
+            state={state}
             inputs={inputs}
         />
     );

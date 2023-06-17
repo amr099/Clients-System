@@ -30,11 +30,11 @@ export default function RevenuesChart() {
     const [years, setYears] = useState();
     const [year, setYear] = useState();
     const [revenues, setRevenues] = useState([]);
-    const { clients, expenses } = useContext(FirebaseContext);
+    const { clientsData, expenses } = useContext(FirebaseContext);
 
     const getYears = async () => {
         let years = new Set();
-        await clients?.map((c) => {
+        await clientsData.clients?.map((c) => {
             c.transaction?.map((t) => {
                 years.add(t.date.split("/")[2]);
             });
@@ -57,7 +57,7 @@ export default function RevenuesChart() {
             [11, 0],
             [12, 0],
         ]);
-        await clients?.map((c) => {
+        await clientsData.clients?.map((c) => {
             c.transaction?.map((t) => {
                 for (let [k, v] of months.entries()) {
                     if (
@@ -69,20 +69,6 @@ export default function RevenuesChart() {
                 }
             });
         });
-        // await expenses?.map((c) => {
-        //     c.transaction?.map((t) => {
-        //         for (let [k, v] of months.entries()) {
-        //             if (
-        //                 t.date.split("/")[1] == k &&
-        //                 t.date.split("/")[2] == year
-        //             ) {
-        //                 console.log(t.cost);
-        //                 months.set(k, months.get(k) - Number(t.cost) || 0);
-        //                 console.log(months);
-        //             }
-        //         }
-        //     });
-        // });
         setRevenues([...months.values()]);
     };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { doc, onSnapshot, updateDoc, arrayRemove } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
@@ -31,6 +31,7 @@ export default function ExpensesTable() {
         const getExpenses = () => {
             if (name) {
                 onSnapshot(doc(db, "Expenses", name), (doc) => {
+                    console.log(doc);
                     let sortedTransactions = doc
                         ?.data()
                         ?.transaction.sort((a, b) => {
