@@ -5,9 +5,9 @@ CRUD web application manage client's information and their daily transactions.
 
 Built with: **React**, **Firebase** and **React-Bootstrap**.
 
-> [Live Demo](https://clientssystem.netlify.app/)  
+[Live Demo](https://clientssystem.netlify.app/)  
 
-> ###The Application consists of a Dashboard used to:
+### The Application consists of a Dashboard used to:
 1. Add new record for new clients (record client's information such as: name, code, registration number, Address and phone number).
 2. Add new transaction (service, cost and down payment).
 3. Add new payment (most of the time client pay part of the service cost so we have to keep track of client payments).
