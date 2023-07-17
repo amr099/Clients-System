@@ -9,15 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export default function CustomForm({
-    label,
-    // loading,
-    // success,
-    // error,
-    state,
-    onSubmit,
-    inputs,
-}) {
+export default function CustomForm({ label, state, onSubmit, inputs }) {
     const { servicesData, clientsData } = useContext(FirebaseContext);
     const {
         register,
@@ -284,7 +276,7 @@ export default function CustomForm({
                     {state?.error && (
                         <Toast bg='warning' autohide='true'>
                             <Toast.Body>
-                                <strong>{error}</strong>
+                                <strong>{state?.error}</strong>
                             </Toast.Body>
                         </Toast>
                     )}

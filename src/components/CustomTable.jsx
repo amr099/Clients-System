@@ -10,7 +10,7 @@ import Container from "react-bootstrap/Container";
 
 export default function CustomTable({ setName, table, label }) {
     const { clientsData } = useContext(FirebaseContext);
-    const [clientData, setClientData] = useState();
+    const [clientData, setClientData] = useState({});
 
     useEffect(() => {
         window.scrollTo(0, 0);

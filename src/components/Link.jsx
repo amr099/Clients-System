@@ -2,13 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function CustomLink({ name, active, icon, setActive }) {
-    const onClick = (e) => {
-        setActive(e.target.name);
-    };
     return (
         <Link
             to={name}
-            onClick={onClick}
+            onClick={(e) => setActive(e.target.name)}
             name={name}
             className={`d-flex no-wrap"  ${active === name && "selected"}`}
         >

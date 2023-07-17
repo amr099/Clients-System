@@ -62,24 +62,21 @@ export default function TransactionsTable() {
         </Table>
     );
 
+    const sortbyDate = (a, b) => {
+        let dateA = a.date.split("/");
+        let dateB = b.date.split("/");
+        dateA = new Date(`${dateA[1]}/${dateA[0]}/${dateA[2]}`);
+        dateB = new Date(`${dateB[1]}/${dateB[0]}/${dateB[2]}`);
+        return dateA - dateB;
+    };
+
     useEffect(() => {
         const getTransactions = () => {
             if (name) {
                 onSnapshot(doc(db, "Clients", name), (doc) => {
                     let sortedTransactions = doc
                         ?.data()
-                        ?.transaction.sort((a, b) => {
-                            let dateA = a.date.split("/");
-                            let dateB = b.date.split("/");
-                            dateA = new Date(
-                                `${dateA[1]}/${dateA[0]}/${dateA[2]}`
-                            );
-                            dateB = new Date(
-                                `${dateB[1]}/${dateB[0]}/${dateB[2]}`
-                            );
-
-                            return dateA - dateB;
-                        });
+                        ?.transaction.sort(sortbyDate);
                     setTransactions(sortedTransactions);
                 });
             }
