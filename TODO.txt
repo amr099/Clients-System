@@ -1,0 +1,6 @@
+Todo Features:
+    - Build statistics section.
+        - Number of clients.
+        - Number of Transactions. / month and year
+        - Revenues. / month and year
+        - Expenses. / month and year

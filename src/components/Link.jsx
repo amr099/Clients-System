@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function CustomLink({ name, active, icon, setActive }) {
+export default function CustomLink({ name, icon, active, setActive }) {
     return (
         <Link
             to={name}
