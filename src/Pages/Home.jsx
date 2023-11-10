@@ -18,6 +18,14 @@ export default function Home() {
           </Col>
         )}
         <Col xs={printMode ? 12 : 9}>
+          {printMode && (
+            <h2>
+              <i
+                class="bi bi-arrow-left-circle"
+                onClick={() => setPrint(false)}
+              ></i>{" "}
+            </h2>
+          )}
           <Outlet className="outlet" />
         </Col>
       </Row>

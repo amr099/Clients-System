@@ -38,14 +38,6 @@ export default function CustomTable({ setName, table, label }) {
 
   return (
     <>
-      {printMode && (
-        <h2>
-          <i
-            class="bi bi-arrow-left-circle"
-            onClick={() => setPrint(false)}
-          ></i>{" "}
-        </h2>
-      )}
       {!printMode && (
         <>
           <Alert variant="primary m-4">

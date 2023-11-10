@@ -4,6 +4,7 @@ import Stack from "react-bootstrap/Stack";
 import CustomLink from "./Link";
 import Button from "react-bootstrap/Button";
 import { PrintContext } from "context/PrintContext";
+import Restore from "./Restore";
 
 export default function Nav() {
   const [active, setActive] = useState("");
