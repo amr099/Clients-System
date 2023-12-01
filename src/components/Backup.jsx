@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FirebaseContext } from "context/FirebaseContext";
 import { saveAs } from "file-saver";
 
-export default function Backup() {
+export default function Backup({ styles }) {
     const { clientsData, servicesData, expensesData } =
         useContext(FirebaseContext);
 
@@ -24,8 +24,12 @@ export default function Backup() {
 
     return (
         <>
-            <button className='w-100 backup' onClick={handleDownload}>
-                <i className='bi bi-cloud-download'></i> <span>Backup</span>
+            <button
+                className={`backup ${styles.backup}`}
+                onClick={handleDownload}
+            >
+                <i className={`bi bi-cloud-download ${styles.navicon}`}></i>{" "}
+                <span>Backup</span>
             </button>
         </>
     );

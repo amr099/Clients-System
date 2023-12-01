@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Nav from "components/Nav";
+import Nav from "components/Nav/Nav";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -12,11 +12,14 @@ export default function Home() {
         <Container fluid>
             <Row>
                 {!printMode && (
-                    <Col xs={3} className='nav-col'>
+                    <Col xs={4} sm={3} className='m-0 p-0'>
                         <Nav />
                     </Col>
                 )}
-                <Col xs={printMode ? 12 : 9}>
+                <Col
+                    s={{ offset: 1, span: printMode ? 12 : 8 }}
+                    xs={{ offset: 1, span: printMode ? 12 : 7 }}
+                >
                     {printMode && (
                         <h2>
                             <i

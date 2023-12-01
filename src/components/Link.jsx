@@ -1,15 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function CustomLink({ name, icon, active, setActive, link }) {
+export default function CustomLink({
+    name,
+    icon,
+    active,
+    setActive,
+    link,
+    styles,
+}) {
     return (
         <Link
             to={link || name}
             onClick={(e) => setActive(e.target.name)}
             name={name}
-            className={`d-flex no-wrap "  ${active === name && "selected"}`}
+            className={`d-flex no-wrap align-items-center" ${styles.link} ${
+                active === name && styles.selected
+            }`}
         >
-            <i className={` ${icon} px-2`}></i> <span>{name}</span>
+            <i className={` ${icon} ${styles.navicon} px-2`}></i>{" "}
+            <span>{name}</span>
         </Link>
     );
 }
