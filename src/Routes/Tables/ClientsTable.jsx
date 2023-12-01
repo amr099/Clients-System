@@ -3,7 +3,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import Table from "react-bootstrap/Table";
 import { useContext } from "react";
-export default function ClientsTable({ clients }) {
+export default function ClientsTable() {
     const { clientsData } = useContext(FirebaseContext);
     const onDelete = async (name) => {
         let response = window.confirm(
@@ -34,16 +34,16 @@ export default function ClientsTable({ clients }) {
             <tbody>
                 {clientsData?.clients?.map((c) => (
                     <tr>
-                        <td>{c.code}</td>
-                        <td>{c.name}</td>
-                        <td>{c.reg}</td>
-                        <td>{c.phone}</td>
-                        <td>{c.address}</td>
+                        <td>{c?.code}</td>
+                        <td>{c?.name}</td>
+                        <td>{c?.reg}</td>
+                        <td>{c?.phone}</td>
+                        <td>{c?.address}</td>
                         <td>
                             {" "}
                             <button
                                 className='btn btn-outline-danger'
-                                onClick={() => onDelete(c.name)}
+                                onClick={() => onDelete(c?.name)}
                             >
                                 <i class='bi bi-trash-fill'></i>
                             </button>

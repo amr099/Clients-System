@@ -56,10 +56,6 @@ const router = createBrowserRouter([
                 path: "/revenues",
                 element: <RevenuesTable />,
             },
-            // {
-            //   path: "/revenueschart",
-            //   element: <RevenuesChart />,
-            // },
             {
                 path: "/client info",
                 element: <ClientInfoForm />,

@@ -8,6 +8,7 @@ import { BarChart } from "./BarChart";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
 import ClientsTable from "./../Tables/ClientsTable";
+
 Chart.register(CategoryScale);
 export default function ExpensesTable() {
     const { clientsData } = useContext(FirebaseContext);
@@ -23,23 +24,23 @@ export default function ExpensesTable() {
     ];
 
     const fetch = async () => {
-        const querySnapshot = await getDocs(collection(db, "Clients"));
-        querySnapshot.forEach((doc) => {
-            setTransactions(
-                (prev) => (prev += doc.data()?.transaction?.length)
-            );
-            for (let t of doc.data()?.transaction) {
-                setPaid((prev) => (prev += Number(t.payment)));
-                setPending(
-                    (prev) => (prev += Number(t.cost) - Number(t.payment))
+        try {
+            const querySnapshot = await getDocs(collection(db, "Clients"));
+            querySnapshot.forEach((doc) => {
+                setTransactions(
+                    (prev) => (prev += doc.data()?.transaction?.length)
                 );
-            }
-        });
+                for (let t of doc.data()?.transaction) {
+                    setPaid((prev) => (prev += Number(t.payment)));
+                    setPending(
+                        (prev) => (prev += Number(t.cost) - Number(t.payment))
+                    );
+                }
+            });
+        } catch (e) {
+            console.log(`error while fetching data. \n ${e}`);
+        }
     };
-
-    const data = [
-        5500, 2300, 9600, 5500, 2300, 9600, 5500, 2300, 9600, 5500, 2300, 9600,
-    ];
 
     useEffect(() => {
         fetch();
@@ -68,15 +69,15 @@ export default function ExpensesTable() {
 
     return (
         <Container className='w-90 mx-auto mt-4'>
-            <div className={styles.row}>
-                {cardsInfo.map((card) =>
-                    card.value ? (
-                        <div className={styles.card}>
-                            <h6>{card.title} </h6>
-                            <p>{card.value}</p>
+            <div className={styles?.row}>
+                {cardsInfo?.map((card) =>
+                    card?.value ? (
+                        <div className={styles?.card}>
+                            <h6>{card?.title} </h6>
+                            <p>{card?.value}</p>
                         </div>
                     ) : (
-                        <div className={styles.skeleton}>
+                        <div className={styles?.skeleton}>
                             <div></div>
                             <div></div>
                         </div>

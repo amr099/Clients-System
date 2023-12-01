@@ -67,7 +67,7 @@ export default function CustomForm({ label, state, onSubmit, inputs }) {
                                         required: true,
                                     })}
                                 >
-                                    {clientsData.loading && (
+                                    {clientsData?.loading && (
                                         <option disabled selected>
                                             Loading ...
                                         </option>
@@ -78,7 +78,7 @@ export default function CustomForm({ label, state, onSubmit, inputs }) {
                                         </option>
                                     ))}
                                 </Form.Select>
-                                {errors.clientName?.type === "required" && (
+                                {errors?.clientName?.type === "required" && (
                                     <span className='error'>
                                         {" "}
                                         This field is required
@@ -101,7 +101,7 @@ export default function CustomForm({ label, state, onSubmit, inputs }) {
                                                 required: true,
                                             })}
                                         />
-                                        {errors.code?.type === "required" && (
+                                        {errors?.code?.type === "required" && (
                                             <span className='error'>
                                                 {" "}
                                                 This field is required.

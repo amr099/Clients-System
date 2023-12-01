@@ -3,7 +3,6 @@ import { doc, onSnapshot, updateDoc, arrayRemove } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 
 export default function ExpensesTable() {
     const [name, setName] = useState();
@@ -39,10 +38,9 @@ export default function ExpensesTable() {
         const getExpenses = () => {
             if (name) {
                 onSnapshot(doc(db, "Expenses", name), (doc) => {
-                    console.log(doc);
                     let sortedTransactions = doc
                         ?.data()
-                        ?.transaction.sort(sortbyDate);
+                        ?.transaction?.sort(sortbyDate);
                     setTransactions(sortedTransactions);
                 });
             }
@@ -63,10 +61,10 @@ export default function ExpensesTable() {
             <tbody>
                 {transactions?.map((t) => (
                     <tr>
-                        <td>{t.date}</td>
-                        <td>{t.expense}</td>
-                        <td>{t.cost || 0}</td>
-                        <td>{t.comment}</td>
+                        <td>{t?.date}</td>
+                        <td>{t?.expense}</td>
+                        <td>{t?.cost || 0}</td>
+                        <td>{t?.comment}</td>
                         <td>
                             <i
                                 className='bi bi-trash delete'

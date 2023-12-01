@@ -4,7 +4,6 @@ import { FirebaseContext } from "context/FirebaseContext";
 import { db } from "firebase-config";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import { PrintContext } from "context/PrintContext";
@@ -90,7 +89,7 @@ export default function CustomTable({ setName, table, label }) {
                                             <i
                                                 className='bi bi-trash delete'
                                                 onClick={() =>
-                                                    onDelete(clientData.name)
+                                                    onDelete(clientData?.name)
                                                 }
                                             ></i>
                                         </td>

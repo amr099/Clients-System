@@ -3,7 +3,7 @@ import styles from "./info.module.css";
 
 export const BarChart = ({ chartData, title, text }) => {
     return (
-        <div className={`chart-container ${styles.chart}`}>
+        <div className={`chart-container ${styles?.chart}`}>
             <h2 style={{ textAlign: "center" }}>{title}</h2>
             <Bar
                 data={chartData}
