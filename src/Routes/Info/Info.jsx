@@ -7,6 +7,7 @@ import { db } from "firebase-config";
 import { BarChart } from "./BarChart";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
+import ClientsTable from "./../Tables/ClientsTable";
 Chart.register(CategoryScale);
 export default function ExpensesTable() {
     const { clientsData } = useContext(FirebaseContext);
@@ -82,11 +83,14 @@ export default function ExpensesTable() {
                     )
                 )}
             </div>
+            <hr />
             <BarChart
                 chartData={chartData}
                 title={"Revenues Of The Year"}
                 text={"Revenues through the year of 2023"}
             />
+            <hr />
+            <ClientsTable />
         </Container>
     );
 }
