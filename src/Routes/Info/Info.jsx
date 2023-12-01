@@ -1,13 +1,9 @@
 import styles from "./info.module.css";
 import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
 import { FirebaseContext } from "context/FirebaseContext";
 import { useContext, useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "firebase-config";
-import Chart from "chart.js/auto";
-import { CategoryScale } from "chart.js";
-import { BarChart } from "./BarChart";
 
 export default function ExpensesTable() {
     const { clientsData } = useContext(FirebaseContext);
@@ -87,7 +83,6 @@ export default function ExpensesTable() {
                 chartData={chartData}
                 title={"Revenues Of The Year"}
                 text={"Revenues through the year of 2023"}
-                styles={styles.chart}
             />
         </Container>
     );

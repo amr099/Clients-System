@@ -1,7 +1,9 @@
 import { Bar } from "react-chartjs-2";
-export const BarChart = ({ chartData, title, text, styles }) => {
+import styles from "./info.module.css";
+
+export const BarChart = ({ chartData, title, text }) => {
     return (
-        <div className={`chart-container ${styles}`}>
+        <div className={`chart-container ${styles.chart}`}>
             <h2 style={{ textAlign: "center" }}>{title}</h2>
             <Bar
                 data={chartData}
