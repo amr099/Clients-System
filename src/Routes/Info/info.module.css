@@ -1,5 +1,5 @@
 .card {
-    background-color: #fff;
+    background-color: #f4f7fa;
     color: #2d3748;
     font-weight: bold;
     border-radius: 15px;
@@ -7,7 +7,6 @@
     flex-direction: column;
     gap: 0.2rem;
     width: 380px;
-    height: 80px;
     padding: 20px;
 }
 
@@ -42,7 +41,6 @@ p {
     padding: 1rem 2rem;
     border-radius: 15px;
     width: 380px;
-    height: 80px;
     padding: 20px;
     animation: loading 1s linear infinite alternate;
     > div:nth-child(1) {
@@ -55,5 +53,11 @@ p {
         width: 60%;
         height: 20px;
         background-color: #aaa;
+    }
+}
+
+@media (max-width: 769px) {
+    .chart {
+        display: none;
     }
 }

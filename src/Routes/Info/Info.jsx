@@ -5,6 +5,10 @@ import { FirebaseContext } from "context/FirebaseContext";
 import { useContext, useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "firebase-config";
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import { BarChart } from "./BarChart";
+
 export default function ExpensesTable() {
     const { clientsData } = useContext(FirebaseContext);
     const [transactions, setTransactions] = useState(0);
@@ -32,9 +36,35 @@ export default function ExpensesTable() {
             }
         });
     };
+
+    const data = [
+        5500, 2300, 9600, 5500, 2300, 9600, 5500, 2300, 9600, 5500, 2300, 9600,
+    ];
+
     useEffect(() => {
         fetch();
     }, []);
+
+    const months = Array.from({ length: 12 }, (e, i) => {
+        return new Date(null, i + 1, null).toLocaleDateString("en", {
+            month: "short",
+        });
+    });
+
+    const chartData = {
+        labels: [...months],
+        datasets: [
+            {
+                label: "revenues",
+                data: [
+                    5500, 2300, 9600, 5500, 2300, 9600, 5500, 2300, 9600, 5500,
+                    2300, 9600,
+                ],
+                backgroundColor: "#000",
+                borderWidth: 1,
+            },
+        ],
+    };
 
     return (
         <Container className='w-90 mx-auto mt-4'>
@@ -53,6 +83,12 @@ export default function ExpensesTable() {
                     )
                 )}
             </div>
+            <BarChart
+                chartData={chartData}
+                title={"Revenues Of The Year"}
+                text={"Revenues through the year of 2023"}
+                styles={styles.chart}
+            />
         </Container>
     );
 }
