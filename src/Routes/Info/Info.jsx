@@ -4,7 +4,10 @@ import { FirebaseContext } from "context/FirebaseContext";
 import { useContext, useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "firebase-config";
-
+import { BarChart } from "./BarChart";
+import { CategoryScale } from "chart.js";
+import Chart from "chart.js/auto";
+Chart.register(CategoryScale);
 export default function ExpensesTable() {
     const { clientsData } = useContext(FirebaseContext);
     const [transactions, setTransactions] = useState(0);
