@@ -1,5 +1,2 @@
 Todo Features:
-    - Error bounderies.
-    - Chart for revenues.
     - DarkMode.
-- Redesign Navbar from Figma.

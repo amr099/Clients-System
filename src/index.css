@@ -1,19 +1,24 @@
+:root {
+    --bg-color: #fff;
+}
+
 body {
-    background-color: #fff;
+    background-color: var(--bg-color);
+}
+
+a {
+    white-space: nowrap !important;
 }
 
 label {
     font-weight: 500;
     font-size: 0.9rem;
 }
+
 label > span,
 .error {
     color: red;
     font-size: 1rem;
-}
-
-.outlet {
-    background-color: #f6f1f1;
 }
 
 i.delete {
@@ -33,19 +38,20 @@ i.delete {
     }
 }
 
-@media (width<= 768px) {
-    h3 {
-        font-size: 0.8rem;
-    }
-    a {
-        gap: 0.3rem;
-        padding: 0;
-    }
+@media (max-width: 768px) {
     * {
-        font-size: 0.6rem;
+        font-size: 14px !important;
     }
-    a,
-    button {
-        font-size: 0.7rem !important;
+}
+
+@media (max-width: 480px) {
+    * {
+        font-size: 9px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    * {
+        font-size: 7px !important;
     }
 }
