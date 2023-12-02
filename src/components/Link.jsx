@@ -11,7 +11,7 @@ export default function CustomLink({
 }) {
     return (
         <Link
-            to={link || name}
+            to={link}
             onClick={(e) => setActive(e.target.name)}
             name={name}
             className={`d-flex no-wrap align-items-center" ${styles.link} ${

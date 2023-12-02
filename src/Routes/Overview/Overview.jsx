@@ -1,4 +1,4 @@
-import styles from "./info.module.css";
+import styles from "./overview.module.css";
 import Container from "react-bootstrap/Container";
 import { FirebaseContext } from "context/FirebaseContext";
 import { useContext, useEffect, useState } from "react";
@@ -7,10 +7,10 @@ import { db } from "firebase-config";
 import { BarChart } from "./BarChart";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
-import ClientsTable from "./../Tables/ClientsTable";
+import ClientsTable from "../Tables/ClientsTable";
 
 Chart.register(CategoryScale);
-export default function ExpensesTable() {
+export default function Overview() {
     const { clientsData } = useContext(FirebaseContext);
     const [transactions, setTransactions] = useState(0);
     const [paid, setPaid] = useState(0);
@@ -68,7 +68,7 @@ export default function ExpensesTable() {
     };
 
     return (
-        <Container className='w-90 mx-auto mt-4'>
+        <Container className='w-90 mx-auto mt-4 '>
             <div className={styles?.row}>
                 {cardsInfo?.map((card) =>
                     card?.value ? (

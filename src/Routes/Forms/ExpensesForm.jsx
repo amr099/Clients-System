@@ -2,17 +2,7 @@ import React, { useReducer } from "react";
 import { updateDoc, doc, arrayUnion, setDoc } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomForm from "components/CustomForm";
-
-const reducer = (state, action) => {
-    switch (action.type) {
-        case "SUCCESS":
-            return { success: true, loading: false, error: "" };
-        case "LOADING":
-            return { success: false, loading: true, error: "" };
-        case "ERROR":
-            return { success: false, loading: false, error: action.payload };
-    }
-};
+import { reducer } from "./reducer";
 
 export default function ExpensesForm() {
     const [state, dispatch] = useReducer(reducer, {

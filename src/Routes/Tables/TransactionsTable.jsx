@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { arrayRemove, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "firebase-config";
 import CustomTable from "components/CustomTable";
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
 export default function TransactionsTable() {

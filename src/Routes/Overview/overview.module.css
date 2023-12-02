@@ -15,15 +15,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-    width: 380px;
     padding: 20px;
 }
 
 .row {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
     margin: 24px;
 }
 
@@ -38,9 +36,7 @@ p {
 
 .skeleton {
     background-color: #ddd;
-    padding: 1rem 2rem;
     border-radius: 15px;
-    width: 380px;
     padding: 20px;
     animation: loading 1s linear infinite alternate;
     > div:nth-child(1) {

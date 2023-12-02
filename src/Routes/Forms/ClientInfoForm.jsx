@@ -3,17 +3,7 @@ import { updateDoc, doc } from "firebase/firestore";
 import { FirebaseContext } from "context/FirebaseContext";
 import { db } from "firebase-config";
 import CustomForm from "components/CustomForm";
-
-const reducer = (state, action) => {
-    switch (action.type) {
-        case "SUCCESS":
-            return { success: true, loading: false, error: "" };
-        case "LOADING":
-            return { success: false, loading: true, error: "" };
-        case "ERROR":
-            return { success: false, loading: false, error: action.payload };
-    }
-};
+import { reducer } from "./reducer";
 
 export default function ClientInfoForm() {
     const [state, dispatch] = useReducer(reducer, {
@@ -64,22 +54,13 @@ export default function ClientInfoForm() {
                 await updateDoc(clientDoc, { address: data.address });
             dispatch({ type: "SUCCESS" });
         } catch (e) {
-            if (
-                e.message ===
-                "No document to update: projects/clients-mangement-system/databases/(default)/documents/Clients/sada"
-            ) {
-                dispatch({
-                    type: "ERROR",
-                    payload: "Client's name not found.",
-                });
-            } else {
-                dispatch({
-                    type: "ERROR",
-                    payload: `Error updating client information: ${e.message}`,
-                });
-            }
+            dispatch({
+                type: "ERROR",
+                payload: `Error updating client information: ${e.message}`,
+            });
         }
     };
+
     return (
         <CustomForm
             label={"Edit Client's Information"}

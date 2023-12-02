@@ -1,2 +1,3 @@
 Todo Features:
     - DarkMode.
+    - handle reset after sumbit.

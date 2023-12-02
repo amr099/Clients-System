@@ -1,32 +1,32 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { FirebaseContextProvider } from "./context/FirebaseContext";
+import { PrintContextProvider } from "context/PrintContext";
 import Home from "./Pages/Home";
 import ClientForm from "./Routes/Forms/ClientForm";
 import TransactionForm from "./Routes/Forms/TransactionForm";
 import PaymentForm from "./Routes/Forms/PaymentForm";
 import ExpensesForm from "./Routes/Forms/ExpensesForm";
-import ClientInfoForm from "./Routes/Forms/ClientInfoForm";
 import ServicesList from "./Routes/Forms/ServicesList";
 import TransactionsTable from "./Routes/Tables/TransactionsTable";
-import RevenuesTable from "./Routes/Tables/RevenuesTable";
 import ExpensesTable from "Routes/Tables/ExpensesTable";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "./index.css";
-import { PrintContextProvider } from "context/PrintContext";
-import Info from "./Routes/Info/Info";
+import Overview from "./Routes/Overview/Overview";
+import ClientInfoForm from "./Routes/Forms/ClientInfoForm";
+import ErrorPage from "components/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Home />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
-                element: <Info />,
-                index: true,
+                element: <Overview />,
             },
             {
                 path: "/client",
@@ -51,10 +51,6 @@ const router = createBrowserRouter([
             {
                 path: "/expenses",
                 element: <ExpensesTable />,
-            },
-            {
-                path: "/revenues",
-                element: <RevenuesTable />,
             },
             {
                 path: "/client info",

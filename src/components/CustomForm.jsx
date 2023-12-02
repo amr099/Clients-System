@@ -15,6 +15,7 @@ export default function CustomForm({ label, state, onSubmit, inputs }) {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm();
 
     useEffect(() => {

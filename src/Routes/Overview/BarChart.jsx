@@ -1,5 +1,5 @@
 import { Bar } from "react-chartjs-2";
-import styles from "./info.module.css";
+import styles from "./overview.module.css";
 
 export const BarChart = ({ chartData, title, text }) => {
     return (

@@ -9,13 +9,8 @@ import Print from "./../Print";
 export default function Nav() {
     const [active, setActive] = useState("");
     const { printMode, setPrint } = useContext(PrintContext);
-    const newLinks = [
-        { name: "Client", icon: "bi bi-person-plus" },
-        { name: "Transaction", icon: "bi bi-person" },
-        { name: "Payment", icon: "bi bi-wallet" },
-        { name: "Expense", icon: "bi bi-coin" },
-    ];
-    const viewLinks = [
+
+    const Links = [
         { name: "Overview", icon: "bi bi-clipboard2-data-fill", link: "/" },
         {
             name: "Transactions",
@@ -23,10 +18,20 @@ export default function Nav() {
             link: "Transactions",
         },
         { name: "Expenses", icon: "bi bi-cash-coin", link: "Expenses" },
-    ];
-    const editLinks = [
-        { name: "Client Info", icon: "bi bi-pencil-square" },
-        { name: "Services List", icon: "bi bi-file-earmark-text" },
+        { name: "Client", icon: "bi bi-person-plus", link: "/client" },
+        { name: "Transaction", icon: "bi bi-person", link: "/transaction" },
+        { name: "Payment", icon: "bi bi-wallet", link: "/payment" },
+        { name: "Expense", icon: "bi bi-coin", link: "/expense" },
+        {
+            name: "Client Info",
+            icon: "bi bi-pencil-square",
+            link: "client info",
+        },
+        {
+            name: "Services List",
+            icon: "bi bi-file-earmark-text",
+            link: "services list",
+        },
     ];
 
     return (
@@ -34,7 +39,7 @@ export default function Nav() {
             {!printMode && (
                 <nav>
                     <Stack gap={3} className={styles.linkstack}>
-                        {viewLinks.map((link) => (
+                        {Links.map((link) => (
                             <CustomLink
                                 key={link.name}
                                 name={link.name}
@@ -42,29 +47,6 @@ export default function Nav() {
                                 setActive={setActive}
                                 icon={link.icon}
                                 link={link.link}
-                                styles={styles}
-                            />
-                        ))}
-                        <hr />
-
-                        {newLinks.map((link) => (
-                            <CustomLink
-                                key={link.name}
-                                name={link.name}
-                                active={active}
-                                setActive={setActive}
-                                icon={link.icon}
-                                styles={styles}
-                            />
-                        ))}
-                        <hr />
-                        {editLinks.map((link) => (
-                            <CustomLink
-                                key={link.name}
-                                name={link.name}
-                                active={active}
-                                setActive={setActive}
-                                icon={link.icon}
                                 styles={styles}
                             />
                         ))}

@@ -10,7 +10,7 @@ import { PrintContext } from "context/PrintContext";
 
 export default function CustomTable({ setName, table, label }) {
     const { clientsData } = useContext(FirebaseContext);
-    const { printMode, setPrint } = useContext(PrintContext);
+    const { printMode } = useContext(PrintContext);
     const [clientData, setClientData] = useState({});
 
     useEffect(() => {

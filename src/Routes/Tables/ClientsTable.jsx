@@ -3,8 +3,10 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { FirebaseContext } from "./../../context/FirebaseContext";
 import Table from "react-bootstrap/Table";
 import { useContext } from "react";
+
 export default function ClientsTable() {
     const { clientsData } = useContext(FirebaseContext);
+
     const onDelete = async (name) => {
         let response = window.confirm(
             "هل انت متأكد من حذف العميل " + name + "?"
