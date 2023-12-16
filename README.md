@@ -34,17 +34,17 @@ Follow these instructions to get a copy of the project up and running on your lo
 ### Prerequisites
 
 - VS Code.
-- Node Js
+- Node Js.
 
 ### Installing
 
-git clone https://github.com/your-username/clients-system.git
+- git clone https://github.com/your-username/clients-system.git
 
-cd clients-system
+- cd clients-system
 
-npm install
+- npm install
 
-npm run dev
+- npm run dev
 
 ### Technologies Used
 
@@ -55,8 +55,8 @@ npm run dev
 
 We welcome contributions from the community! If you'd like to contribute to the project, please follow these guidelines:
 
-1- Fork the repository.
-2- Create a new branch: git checkout -b feature/new-feature.
-3- Make your changes and commit them: git commit -m 'Add new feature'.
-4- Push to the branch: git push origin feature/new-feature.
-5- Submit a pull request.
+- Fork the repository.
+- Create a new branch: git checkout -b feature/new-feature.
+- Make your changes and commit them: git commit -m 'Add new feature'.
+- Push to the branch: git push origin feature/new-feature.
+- Submit a pull request.
