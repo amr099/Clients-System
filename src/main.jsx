@@ -1,22 +1,18 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./index.css";
+import "./global.scss";
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { FirebaseContextProvider } from "./context/FirebaseContext";
-import { PrintContextProvider } from "context/PrintContext";
-import Home from "./Pages/Home";
-import ClientForm from "./Routes/Forms/ClientForm";
-import TransactionForm from "./Routes/Forms/TransactionForm";
-import PaymentForm from "./Routes/Forms/PaymentForm";
-import ExpensesForm from "./Routes/Forms/ExpensesForm";
-import ServicesList from "./Routes/Forms/ServicesList";
-import TransactionsTable from "./Routes/Tables/TransactionsTable";
-import ExpensesTable from "Routes/Tables/ExpensesTable";
-import Overview from "./Routes/Overview/Overview";
-import ClientInfoForm from "./Routes/Forms/ClientInfoForm";
-import ErrorPage from "components/ErrorPage";
+import Home from "./pages/Home";
+import ClientForm from "./forms/ClientForm";
+import TransactionForm from "./forms/TransactionForm";
+import TransactionsTable from "./routes/TransactionsTable";
+import Overview from "./routes/Overview";
+import ClientInfoForm from "./forms/ClientInfoForm";
+import ErrorPage from "pages/ErrorPage";
+import ClientsTable from "routes/ClientsTable";
 
 const router = createBrowserRouter([
     {
@@ -28,37 +24,26 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <Overview />,
             },
+            { path: "/clients", element: <ClientsTable /> },
             {
                 path: "/client",
                 element: <ClientForm />,
             },
             {
-                path: "/transaction",
+                path: "/transaction/:id",
                 element: <TransactionForm />,
             },
             {
-                path: "/payment",
-                element: <PaymentForm />,
-            },
-            {
-                path: "/expense",
-                element: <ExpensesForm />,
+                path: "/clientdetails/:id",
+                element: <TransactionsTable />,
             },
             {
                 path: "/transactions",
                 element: <TransactionsTable />,
             },
             {
-                path: "/expenses",
-                element: <ExpensesTable />,
-            },
-            {
-                path: "/client info",
+                path: "/edit/:id",
                 element: <ClientInfoForm />,
-            },
-            {
-                path: "/services list",
-                element: <ServicesList />,
             },
         ],
     },
@@ -67,9 +52,7 @@ const router = createBrowserRouter([
 ReactDOM.render(
     <React.StrictMode>
         <FirebaseContextProvider>
-            <PrintContextProvider>
-                <RouterProvider router={router} />
-            </PrintContextProvider>
+            <RouterProvider router={router} />
         </FirebaseContextProvider>
     </React.StrictMode>,
     document.getElementById("root")

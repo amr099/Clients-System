@@ -1,0 +1,25 @@
+.link {
+    all: unset;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-clr);
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.1s ease-in-out;
+    .navicon {
+        color: var(--pr-font-clr);
+    }
+}
+
+.selected,
+.link:hover {
+    color: var(--pr-font-clr);
+    font-weight: bold;
+    background-color: var(--bg-clr);
+    cursor: pointer;
+    .navicon {
+        color: var(--sec-clr);
+    }
+}

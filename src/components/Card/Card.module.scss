@@ -1,0 +1,62 @@
+.card {
+    background-color: #f4f7fe;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: var(pr-font-clr);
+}
+
+.card i {
+    font-size: 2.5rem;
+}
+
+.card h5 {
+    margin-bottom: 0;
+}
+
+span {
+    font-size: 0.8rem;
+}
+
+p {
+    margin: 0;
+}
+
+.skeleton {
+    background-color: #ddd;
+    border-radius: 8px;
+    padding: 26px;
+    animation: loading 1s linear infinite alternate;
+    display: flex;
+    justify-content: space-between;
+    h5 {
+        width: 40px;
+        height: 20px;
+        background-color: #00000028;
+        margin-bottom: 0.2rem;
+    }
+    span {
+        display: block;
+        width: 100px;
+        height: 15px;
+        background-color: #00000028;
+    }
+
+    i {
+        width: 40px;
+        height: 30px;
+        background-color: #00000028;
+        border-radius: 4px;
+    }
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}

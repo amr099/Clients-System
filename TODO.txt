@@ -1,3 +1,13 @@
-Todo Features:
-    - DarkMode.
-    - handle reset after sumbit.
+
+
+Updates:
+    Styling:
+        - DarkMode.
+        - client info page
+        - Charts (responsive, colors, title, border)
+    - Balance as a property of client doc.
+    - Filter positive balance.
+    - add table for client added in the week.(List group)
+    - Modal for transaction delete.
+
+    
