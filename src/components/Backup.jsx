@@ -40,7 +40,7 @@ export default function Backup() {
                 ["Date", "Service", "Comment", "Cost", "Payment", "Balance"],
             ];
 
-            client.transaction.forEach((transaction) => {
+            client.transactions.forEach((transaction) => {
                 const row = [
                     transaction.date || "",
                     transaction.service || "",
