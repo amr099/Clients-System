@@ -2,13 +2,13 @@ import { FirebaseContext } from "context/FirebaseContext";
 import { useContext, useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "firebase-config";
+import { BarChart } from "../components/Charts/BarChart";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
 import { Row, Col } from "react-bootstrap";
+import { PieChart } from "../components/Charts/PieChart";
+import { LineChart } from "../components/Charts/LineChart";
 import Card from "../components/Card/Card";
-import { PieChart } from "./../components/Charts/PieChart";
-import { LineChart } from "./../components/Charts/LineChart";
-import { BarChart } from "./../components/Charts/BarChart";
 
 Chart.register(CategoryScale);
 export default function Overview() {
