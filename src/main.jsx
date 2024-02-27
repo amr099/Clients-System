@@ -5,13 +5,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { FirebaseContextProvider } from "./context/FirebaseContext";
-import Home from "./pages/Home";
+import Home from "./Pages/Home";
 import ClientForm from "./forms/ClientForm";
 import TransactionForm from "./forms/TransactionForm";
 import TransactionsTable from "./routes/TransactionsTable";
 import Overview from "./routes/Overview";
 import ClientInfoForm from "./forms/ClientInfoForm";
-import ErrorPage from "pages/ErrorPage";
+import ErrorPage from "Pages/ErrorPage";
 import ClientsTable from "routes/ClientsTable";
 
 const router = createBrowserRouter([
